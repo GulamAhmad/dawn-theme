@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>{{ page_title }}</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Link your custom global CSS here -->
+    {{ 'custom-global.css' | asset_url | stylesheet_tag }}
+    
+    <!-- MANDATORY: Shopify uses this to load apps and analytics -->
+    {{ content_for_header }}
+  </head>
+  
+  <body>
+    <!-- Your Custom Navbar -->
+    {% sections 'header-group' %}
+    
+    <!-- MANDATORY: This is where your homepage (index.json) renders -->
+    <main role="main" tabindex="-1">
+      {{ content_for_layout }} 
+    </main>
+    
+    <!-- Your Custom Footer -->
+    {% sections 'footer-group' %}
+  </body>
+</html>

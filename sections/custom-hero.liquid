@@ -1,0 +1,114 @@
+{{ 'custom-hero.css' | asset_url | stylesheet_tag }}
+
+<!-- NEW HERO SECTION REPLICATION -->
+<div class="hero-wrapper hero-loaded">
+  <!-- AMBIENT LAYER -->
+  <div class="ambient-layer">
+    <div class="orb orb-cyan"></div>
+    <div class="orb orb-magenta"></div>
+    <div class="orb orb-amber"></div>
+    <div class="grid-lines"></div>
+  </div>
+
+  <!-- HERO BODY -->
+  <section class="hero-section">
+    <!-- Left Column -->
+    <div class="hero-left">
+      <div class="eyebrow-row">
+        <div class="eyebrow-line"></div>
+        <span class="eyebrow-text"
+          >Dual-sided illumination · RGB Smart Desk Lamp</span
+        >
+      </div>
+
+      <h1 class="hero-headline">
+        <div class="headline-line1">ATMOSPHERE MEETS</div>
+        <div class="headline-line2">
+          <span class="hl-univer">CONTR</span><span class="hl-s">O</span><span class="hl-e">L</span>
+        </div>
+      </h1>
+
+      <p class="hero-subtext">
+        Immersive RGB.
+        <span class="bold-white">Warm productivity.</span> Two independent
+        light engines — one for the ambience, one for the work. The only
+        desk lamp you'll ever need.
+      </p>
+
+      <div class="cta-row">
+        <button class="primary-btn">
+          Pre-order now
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </button>
+        <button class="ghost-btn">
+          <div class="play-circle">
+            <svg
+              width="8"
+              height="10"
+              viewBox="0 0 8 10"
+              fill="currentColor"
+            >
+              <path d="M0 0L8 5L0 10V0Z" />
+            </svg>
+          </div>
+          Watch the film
+        </button>
+      </div>
+    </div>
+
+    <!-- Right Column -->
+    <div class="hero-right">
+      <div class="vignette"></div>
+      <div class="outer-ring"></div>
+      <div class="inner-ring"></div>
+      <img src="{{ 'rgb1.png' | asset_url }}" alt="Lambaty Smart Lamp" class="product-image" />
+
+      <div class="glass-chip chip-1">
+        <div class="chip-dot dot-cyan"></div>
+        RGB Mode Active
+      </div>
+      <div class="glass-chip chip-2">
+        <div class="chip-dot dot-amber"></div>
+        4000K Warm White
+      </div>
+      <div class="glass-chip chip-3">
+        <div class="chip-dot dot-magenta"></div>
+        Bias Lighting On
+      </div>
+    </div>
+
+    <!-- Bottom Elements -->
+    <div class="scroll-cue">
+      <div class="scroll-line"></div>
+      <span>Scroll to explore</span>
+    </div>
+
+    <div class="version-badge">
+      Gen II — <span class="current-year">2025</span>
+    </div>
+  </section>
+</div>
+<!-- END NEW HERO SECTION REPLICATION -->
+
+{% schema %}
+{
+  "name": "Custom Hero",
+  "presets": [
+    {
+      "name": "Custom Hero",
+      "category": "Custom Sections"
+    }
+  ]
+}
+{% endschema %}

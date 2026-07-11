@@ -1,0 +1,17 @@
+/* --- LAMBATY GLOBAL DESIGN SYSTEM --- */
+:root {
+  --cyan: #00e6d2;
+  --magenta: #ff1478;
+  --amber: #ffb400;
+  --purple: rgba(60, 0, 120, 0.20);
+  --bg-dark: #060810;
+}
+
+body {
+  font-family: 'Space Grotesk', sans-serif !important;
+  background-color: var(--bg-dark) !important;
+  color: #ffffff !important;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
