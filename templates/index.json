@@ -20,6 +20,10 @@
     "custom_showcase": {
       "type": "custom-showcase",
       "settings": {}
+    },
+    "custom_eng": {
+      "type": "custom-eng",
+      "settings": {}
     }
   },
   "order": [
@@ -27,6 +31,7 @@
     "custom_wing",
     "custom_music",
     "custom_focused",
-    "custom_showcase"
+    "custom_showcase",
+    "custom_eng"
   ]
 }
