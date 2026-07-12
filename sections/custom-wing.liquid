@@ -1,0 +1,201 @@
+{{ 'custom-wing.css' | asset_url | stylesheet_tag }}
+
+<!-- WING / FORM SECTION -->
+<div class="stats-section" id="stats-section">
+  <!-- AMBIENT LAYER -->
+  <div class="stats-ambient">
+    <div class="stats-orb orb-c"></div>
+    <div class="stats-orb orb-m"></div>
+    <div class="stats-orb orb-a"></div>
+    <div class="stats-grid-lines"></div>
+  </div>
+
+  <div class="section-inner">
+    <!-- LEFT COLUMN: PRODUCT IMAGE SLIDESHOW -->
+    <div class="product-col">
+      <div class="decorative-ring"></div>
+
+      <div class="product-wrap">
+        <div class="product-tilt" id="stats-product-tilt">
+          <img src="{{ 'rgb3.png' | asset_url }}" alt="Wing Position 1" class="wing-img active" loading="lazy" decoding="async" />
+          <img src="{{ 'rgb2.png' | asset_url }}" alt="Wing Position 2" class="wing-img" loading="lazy" decoding="async" />
+          <img src="{{ 'rgb1.png' | asset_url }}" alt="Wing Position 3" class="wing-img" loading="lazy" decoding="async" />
+        </div>
+        <div class="slideshow-controls justify-center mt-8">
+           <div class="slide-dot active" data-index="0"></div>
+           <div class="slide-dot" data-index="1"></div>
+           <div class="slide-dot" data-index="2"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT COLUMN: CAPTIONS -->
+    <div class="stats-left">
+      <div class="stats-eyebrow">
+        <div class="eyebrow-line"></div>
+        <span>RGB + WING FLEXIBILITY</span>
+      </div>
+
+      <div class="wing-captions-container">
+        <h2 class="wing-caption active">Shape the light your way.</h2>
+        <h2 class="wing-caption">One form. Multiple moods.</h2>
+        <h2 class="wing-caption">Adjust the wings. Transform the space.</h2>
+      </div>
+
+      <div class="stats-row-container">
+        <div class="stat-block" data-target="16">
+          <div class="stat-number-wrap">
+            <span class="stat-value grad-cyan-magenta">0</span><span class="stat-suffix grad-cyan-magenta">M+</span>
+          </div>
+          <div class="stat-label">VIBRANT COLORS</div>
+          <p class="stat-label" style="font-size: 12px; margin-top: 4px; text-transform: none; color: rgba(255, 255, 255, 0.5);">16 Million ways to set the tone</p>
+        </div>
+
+        <div class="stat-block" data-target="200">
+          <div class="stat-number-wrap">
+            <span class="stat-value solid-cyan">0</span><span class="stat-suffix solid-cyan">+</span>
+          </div>
+          <div class="stat-label">DYNAMIC LIGHTING MODES</div>
+          <p class="stat-label" style="font-size: 12px; margin-top: 4px; text-transform: none; color: rgba(255, 255, 255, 0.5);">Dynamic light, endless atmosphere</p>
+        </div>
+
+        <div class="stat-block" data-target="1000">
+          <div class="stat-number-wrap">
+            <span class="stat-value solid-amber">0</span><span class="stat-suffix solid-amber">lm</span>
+          </div>
+          <div class="stat-label">PEAK LUMEN OUTPUT</div>
+          <p class="stat-label" style="font-size: 12px; margin-top: 4px; text-transform: none; color: rgba(255, 255, 255, 0.5);">From subtle glow to full immersion</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END WING / FORM SECTION -->
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    // --- NEW WING / FORM SECTION LOGIC ---
+    const wingSection = document.getElementById('stats-section');
+    if (wingSection) {
+      const wingImages = wingSection.querySelectorAll('.wing-img');
+      const wingCaptions = wingSection.querySelectorAll('.wing-caption');
+      const slideDots = wingSection.querySelectorAll('.slide-dot');
+      let currentSlide = 0;
+      let slideInterval;
+
+      function updateSlide(index) {
+        if (wingImages.length === 0) return;
+        wingImages.forEach(img => img.classList.remove('active'));
+        wingCaptions.forEach(cap => cap.classList.remove('active'));
+        slideDots.forEach(dot => dot.classList.remove('active'));
+
+        wingImages[index].classList.add('active');
+        wingCaptions[index].classList.add('active');
+        slideDots[index].classList.add('active');
+      }
+
+      function nextSlide() {
+        if (wingImages.length === 0) return;
+        currentSlide = (currentSlide + 1) % wingImages.length;
+        updateSlide(currentSlide);
+      }
+
+      function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
+
+      const wingObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            if (!slideInterval) {
+               slideInterval = setInterval(nextSlide, 3500);
+            }
+            
+            const prodCol = wingSection.querySelector('.product-col');
+            if (prodCol) prodCol.classList.add('visible');
+            
+            // Animate stat blocks
+            const statBlocks = wingSection.querySelectorAll('.stat-block');
+            statBlocks.forEach((block, index) => {
+              setTimeout(() => {
+                block.classList.add('visible');
+              }, index * 150);
+              
+              const targetStr = block.getAttribute('data-target');
+              if (!targetStr) return;
+              const target = parseInt(targetStr, 10);
+              const valEl = block.querySelector('.stat-value');
+              if (!valEl) return;
+              
+              let startTime = null;
+              const duration = 2000;
+              
+              function updateCounter(currentTime) {
+                if (!startTime) startTime = currentTime;
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                
+                const currentVal = Math.round(easeOutCubic(progress) * target);
+                valEl.textContent = currentVal;
+                
+                if (progress < 1) {
+                  requestAnimationFrame(updateCounter);
+                }
+              }
+              requestAnimationFrame(updateCounter);
+            });
+            
+          } else {
+             clearInterval(slideInterval);
+             slideInterval = null;
+          }
+        });
+      }, { threshold: 0.15 });
+      
+      wingObserver.observe(wingSection);
+
+      slideDots.forEach((dot, index) => {
+         dot.addEventListener('click', () => {
+            clearInterval(slideInterval);
+            currentSlide = index;
+            updateSlide(currentSlide);
+            slideInterval = setInterval(nextSlide, 3500);
+         });
+      });
+    }
+
+    // 3D Tilt Effect on Product Stage
+    const productCol = document.querySelector('.product-col');
+    const productTilt = document.getElementById('stats-product-tilt');
+    
+    if (productCol && productTilt && !('ontouchstart' in window)) {
+      productCol.addEventListener('mousemove', (e) => {
+        const rect = productCol.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        
+        const deltaX = e.clientX - centerX;
+        const deltaY = e.clientY - centerY;
+        
+        const rotateX = (deltaY / rect.height) * -12; // max ±12deg
+        const rotateY = (deltaX / rect.width) * 12;
+        
+        productTilt.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
+      });
+      
+      productCol.addEventListener('mouseleave', () => {
+        productTilt.style.transform = `perspective(800px) rotateX(0deg) rotateY(0deg) scale(1)`;
+      });
+    }
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Custom Wing",
+  "presets": [
+    {
+      "name": "Custom Wing",
+      "category": "Custom Sections"
+    }
+  ]
+}
+{% endschema %}

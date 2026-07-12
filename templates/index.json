@@ -4,9 +4,14 @@
     "custom_hero": {
       "type": "custom-hero",
       "settings": {}
+    },
+    "custom_wing": {
+      "type": "custom-wing",
+      "settings": {}
     }
   },
   "order": [
-    "custom_hero"
+    "custom_hero",
+    "custom_wing"
   ]
 }
