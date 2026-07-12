@@ -1,0 +1,201 @@
+{{ 'custom-showcase.css' | asset_url | stylesheet_tag }}
+
+<!-- 3.7 Cinematic Showcase (Horizontal Scroll) -->
+<section id="usecases" class="showcase-section">
+  <div class="pin-container">
+    <div class="pin-wrap">
+
+      <!-- Panel 1: Gaming Setup -->
+      <div class="showcase-panel">
+        <div class="showcase-bg">
+          <div class="showcase-orb orb-rgb-m" data-speed="0.8"></div>
+          <div class="showcase-grid-lines"></div>
+        </div>
+        <div class="showcase-content">
+          <div class="showcase-text-content" data-speed="1.15">
+            <div class="showcase-eyebrow">
+              <div class="eyebrow-line"></div>
+              <span>GAMING SETUP</span>
+            </div>
+            <h3 class="showcase-headline">
+              BUILT FOR
+              <span class="text-brand-magenta">IMMERSIVE</span> SETUPS.
+            </h3>
+          </div>
+          <div class="showcase-visual dual-image" data-speed="0.95">
+            <div class="img-wrapper main-img" data-speed="0.9">
+              <img
+                src="{{ 'setup1.webp' | asset_url }}"
+                alt="Gaming Setup 1"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <div class="img-wrapper sub-img" data-speed="1.2">
+              <img
+                src="{{ 'setup2.webp' | asset_url }}"
+                alt="Gaming Setup 2"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel 2: Home Office Setup -->
+      <div class="showcase-panel">
+        <div class="showcase-bg">
+          <div class="showcase-orb orb-warm" data-speed="0.85"></div>
+          <div class="showcase-grid-lines"></div>
+        </div>
+        <div class="showcase-content reverse">
+          <div class="showcase-text-content" data-speed="1.1">
+            <div class="showcase-eyebrow">
+              <div class="eyebrow-line"></div>
+              <span>HOME OFFICE SETUP</span>
+            </div>
+            <h3 class="showcase-headline">
+              A CLEANER DESK. <br /><span class="text-amber-500">A CALMER WORKFLOW.</span>
+            </h3>
+          </div>
+          <div class="showcase-visual dual-image" data-speed="0.92">
+            <div class="img-wrapper main-img" data-speed="0.85">
+              <img
+                src="{{ 'White-Light-Desk-Set-up-copy.webp' | asset_url }}"
+                alt="Home Office 1"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <div class="img-wrapper sub-img" data-speed="1.15">
+              <img
+                src="{{ 'Colored-Desk-Set-Up-2-copy.webp' | asset_url }}"
+                alt="Home Office 2"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel 3: Bedroom Setup -->
+      <div class="showcase-panel">
+        <div class="showcase-bg">
+          <div class="showcase-orb orb-neutral" data-speed="0.9"></div>
+          <div class="showcase-grid-lines"></div>
+        </div>
+        <div class="showcase-content">
+          <div class="showcase-text-content" data-speed="1.2">
+            <div class="showcase-eyebrow">
+              <div class="eyebrow-line"></div>
+              <span>BEDROOM SETUP</span>
+            </div>
+            <h3 class="showcase-headline">
+              SOFTER LIGHT FOR <span class="text-white">SLOWER HOURS.</span>
+            </h3>
+          </div>
+          <div class="showcase-visual dual-image" data-speed="0.95">
+            <div class="img-wrapper main-img" data-speed="0.9">
+              <img
+                src="{{ 'White-Light-Bed-Set-Up-2-copy.webp' | asset_url }}"
+                alt="Bedroom Setup 1"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <div class="img-wrapper sub-img" data-speed="1.25">
+              <img
+                src="{{ 'Colored-Bed-Set-Up-2-copy.webp' | asset_url }}"
+                alt="Bedroom Setup 2"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    function initShowcase() {
+      if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+        // GSAP not yet ready, retry once after a short delay
+        setTimeout(initShowcase, 300);
+        return;
+      }
+
+      const showcasePanels = gsap.utils.toArray('.showcase-panel');
+      const pinWrap = document.querySelector('.pin-wrap');
+
+      if (!showcasePanels.length || !pinWrap) return;
+
+      const isMobile = window.innerWidth <= 768;
+
+      if (isMobile) {
+        // On mobile: disable GSAP pin — let native CSS snap-scroll take over
+        // The CSS already handles this with overflow-x: auto on .pin-wrap
+        document.querySelector('.pin-container').classList.add('mobile-scroll');
+        return;
+      }
+
+      let scrollTween = gsap.to(showcasePanels, {
+        xPercent: -100 * (showcasePanels.length - 1),
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '.pin-container',
+          pin: true,
+          scrub: 1,
+          snap: 1 / (showcasePanels.length - 1),
+          end: () => '+=' + pinWrap.offsetWidth,
+        },
+      });
+
+      // Parallax on [data-speed] elements inside each panel
+      showcasePanels.forEach((panel) => {
+        panel.querySelectorAll('[data-speed]').forEach((el) => {
+          const speed = parseFloat(el.getAttribute('data-speed'));
+          const offset = (1 - speed) * 200;
+          gsap.fromTo(
+            el,
+            { x: offset },
+            {
+              x: -offset,
+              ease: 'none',
+              scrollTrigger: {
+                trigger: panel,
+                containerAnimation: scrollTween,
+                start: 'left right',
+                end: 'right left',
+                scrub: true,
+              },
+            }
+          );
+        });
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initShowcase);
+    } else {
+      initShowcase();
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Cinematic Showcase",
+  "presets": [
+    {
+      "name": "Cinematic Showcase",
+      "category": "Custom Sections"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,323 @@
+{{ 'custom-focused.css' | asset_url | stylesheet_tag }}
+
+    <!-- 3.5 FOCUSED BRILLIANCE SECTION -->
+    <section class="focused" id="productivity">
+      <!-- AMBIENT LAYER -->
+      <div class="focused-ambient">
+        <div class="focused-orb orb-warm" id="orb-warm"></div>
+        <div class="focused-orb orb-cool" id="orb-cool"></div>
+        <div class="focused-orb orb-neutral"></div>
+        <div class="focused-grid-lines"></div>
+      </div>
+
+      <div class="section-inner">
+        <!-- LEFT COLUMN - Image Stage -->
+        <div class="image-col">
+          <div class="eyebrow-row">
+            <div class="focused-eyebrow-line"></div>
+            <span class="focused-eyebrow-text">PRODUCTIVITY MODE</span>
+          </div>
+
+          <h2 class="focused-headline">
+            FOCUSED <span class="focused-hl-amber">BRILLIANCE</span>
+          </h2>
+
+          <p class="focused-subtext">
+            Switch between warm candlelight and crisp cool white. Perfect
+            illumination for reading, deep work, or winding down.
+          </p>
+
+          <div class="image-frame">
+            <img
+              src="{{ 'white-lamp-1.webp' | asset_url }}"
+              alt="White Light Desk Setup"
+              id="focused-img"
+              loading="lazy"
+              decoding="async"
+            />
+            <div class="temp-label" id="temp-label">4000K — Warm White</div>
+          </div>
+        </div>
+
+        <!-- RIGHT COLUMN - Control Panel -->
+        <div class="control-panel">
+          <div class="panel-header">LIGHT CONTROL</div>
+
+          <!-- TEMPERATURE SLIDER BLOCK -->
+          <div class="slider-block">
+            <div class="slider-row-top">
+              <span class="slider-label">TEMPERATURE</span>
+              <span class="slider-value" id="temp-val">4000K</span>
+            </div>
+            <div class="slider-track-wrap">
+              <div class="slider-track temp-track"></div>
+              <input
+                type="range"
+                min="2700"
+                max="6500"
+                value="4000"
+                class="custom-slider"
+                id="temp-slider"
+              />
+              <div class="thumb temp-thumb" id="temp-thumb"></div>
+            </div>
+            <div class="slider-row-bottom">
+              <span class="warm-label">Warm</span>
+              <span class="neutral-label">Neutral</span>
+              <span class="cool-label">Cool</span>
+            </div>
+          </div>
+
+          <!-- BRIGHTNESS SLIDER BLOCK -->
+          <div class="slider-block mt-40">
+            <div class="slider-row-top">
+              <span class="slider-label">BRIGHTNESS</span>
+              <span class="slider-value brightness-val" id="bright-val"
+                >80%</span
+              >
+            </div>
+            <div class="slider-track-wrap">
+              <div class="slider-track bright-track"></div>
+              <input
+                type="range"
+                min="0"
+                max="100"
+                value="80"
+                class="custom-slider"
+                id="bright-slider"
+              />
+              <div class="thumb bright-thumb" id="bright-thumb"></div>
+            </div>
+            <div class="slider-row-bottom">
+              <span class="bright-min">0%</span>
+              <span class="bright-max">100%</span>
+            </div>
+          </div>
+
+          <!-- COLOR TEMPERATURE PRESETS -->
+          <div class="presets-container">
+            <div class="presets-label">PRESETS</div>
+            <div class="presets-grid">
+              <button class="preset-btn" data-temp="2700">
+                <div
+                  class="preset-dot"
+                  style="background: #ff9a3c; box-shadow: 0 0 8px #ff9a3c"
+                ></div>
+                <div class="preset-info">
+                  <div class="preset-name">Candlelight</div>
+                  <div class="preset-kelvin">2700K</div>
+                </div>
+              </button>
+              <button class="preset-btn active" data-temp="4000">
+                <div
+                  class="preset-dot"
+                  style="background: #ffcf7a; box-shadow: 0 0 8px #ffcf7a"
+                ></div>
+                <div class="preset-info">
+                  <div class="preset-name">Warm White</div>
+                  <div class="preset-kelvin">4000K</div>
+                </div>
+              </button>
+              <button class="preset-btn" data-temp="5500">
+                <div
+                  class="preset-dot"
+                  style="background: #fff5e0; box-shadow: 0 0 8px #fff5e0"
+                ></div>
+                <div class="preset-info">
+                  <div class="preset-name">Daylight</div>
+                  <div class="preset-kelvin">5500K</div>
+                </div>
+              </button>
+              <button class="preset-btn" data-temp="6500">
+                <div
+                  class="preset-dot"
+                  style="background: #b4dcff; box-shadow: 0 0 8px #b4dcff"
+                ></div>
+                <div class="preset-info">
+                  <div class="preset-name">Cool White</div>
+                  <div class="preset-kelvin">6500K</div>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- END FOCUSED BRILLIANCE SECTION -->
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+      // --- FOCUSED BRILLIANCE LOGIC ---
+      const focusedSection = document.querySelector('.focused');
+      if (focusedSection) {
+        const tempSliderFocused = document.getElementById('temp-slider');
+        const brightSliderFocused = document.getElementById('bright-slider');
+        const tempValFocused = document.getElementById('temp-val');
+        const brightValFocused = document.getElementById('bright-val');
+        const tempThumb = document.getElementById('temp-thumb');
+        const brightThumb = document.getElementById('bright-thumb');
+        const focusedImg = document.getElementById('focused-img');
+        const tempLabel = document.getElementById('temp-label');
+        const controlPanel = document.querySelector('.control-panel');
+        const presetBtns = document.querySelectorAll('.preset-btn');
+        const warmOrb = document.getElementById('orb-warm');
+        
+        function updateAmbient(tempK, brightness) {
+          const t = (tempK - 2700) / (6500 - 2700);
+          const b = brightness / 100;
+          
+          // Increased opacities for more intense warm/cold glow
+          const warmOpacity = (1 - t) * 0.45 * b;
+          const coolOpacity = t * 0.35 * b;
+          
+          focusedSection.style.setProperty('--warm-opacity', warmOpacity.toFixed(3));
+          focusedSection.style.setProperty('--cool-opacity', coolOpacity.toFixed(3));
+        }
+
+        function updateImageFilter(tempK, brightness) {
+          const t = (tempK - 2700) / (6500 - 2700);
+          const b = brightness / 100;
+          
+          const sepia = Math.round((1 - t) * 45); // slightly more sepia
+          const saturate = Math.round(90 + t * 30);
+          const hueRotate = Math.round(t * 15);
+          // Increased brightness range for higher intensity
+          const brightnessVal = Math.round(60 + b * 80);
+          
+          focusedImg.style.filter = `sepia(${sepia}%) saturate(${saturate}%) hue-rotate(${hueRotate}deg) brightness(${brightnessVal}%)`;
+        }
+        
+        function interpolateColor(color1, color2, factor) {
+            const result = color1.slice();
+            for (let i = 0; i < 3; i++) {
+                result[i] = Math.round(result[i] + factor * (color2[i] - color1[i]));
+            }
+            return result;
+        }
+
+        function hexToRgb(hex) {
+            const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+            return result ? [
+                parseInt(result[1], 16),
+                parseInt(result[2], 16),
+                parseInt(result[3], 16)
+            ] : null;
+        }
+        
+        function rgbToHex(r, g, b) {
+            return "#" + (1 << 24 | r << 16 | g << 8 | b).toString(16).slice(1);
+        }
+
+        function updateFocusedLighting() {
+          const temp = parseInt(tempSliderFocused.value);
+          const bright = parseInt(brightSliderFocused.value);
+          
+          tempValFocused.innerText = temp + "K";
+          brightValFocused.innerText = bright + "%";
+          
+          const t = (temp - 2700) / (6500 - 2700);
+          
+          tempThumb.style.left = `${t * 100}%`;
+          brightThumb.style.left = `${bright}%`;
+          
+          const amber = hexToRgb('#ffb400');
+          const white = hexToRgb('#ffffff');
+          const blue = hexToRgb('#b4dcff');
+          
+          let currentColorHex;
+          if (t < 0.5) {
+              const factor = t / 0.5;
+              const rgb = interpolateColor(amber, white, factor);
+              currentColorHex = rgbToHex(rgb[0], rgb[1], rgb[2]);
+          } else {
+              const factor = (t - 0.5) / 0.5;
+              const rgb = interpolateColor(white, blue, factor);
+              currentColorHex = rgbToHex(rgb[0], rgb[1], rgb[2]);
+          }
+          
+          tempValFocused.style.color = currentColorHex;
+          tempLabel.style.color = currentColorHex;
+          
+          if (t > 0.6) {
+              controlPanel.classList.add('cool-panel');
+              tempThumb.style.boxShadow = `0 0 0 1px rgba(255,255,255,0.3), 0 0 12px rgba(180,220,255,0.5)`;
+          } else {
+              controlPanel.classList.remove('cool-panel');
+              tempThumb.style.boxShadow = `0 0 0 1px rgba(255,255,255,0.3), 0 0 12px rgba(255,180,0,0.4)`;
+          }
+          
+          let labelText = "Warm White";
+          if (temp <= 3000) labelText = "Candlelight";
+          else if (temp > 3000 && temp <= 4500) labelText = "Warm White";
+          else if (temp > 4500 && temp <= 5800) labelText = "Daylight";
+          else labelText = "Cool White";
+          
+          tempLabel.innerText = `${temp}K — ${labelText}`;
+          
+          updateAmbient(temp, bright);
+          updateImageFilter(temp, bright);
+          
+          presetBtns.forEach(btn => {
+              if (parseInt(btn.dataset.temp) === temp) {
+                  btn.classList.add('active');
+              } else {
+                  btn.classList.remove('active');
+              }
+          });
+        }
+
+        // rAF-throttle slider updates to prevent dozens of expensive recalcs/sec on mobile
+        let focusedRafPending = false;
+        function throttledUpdateFocusedLighting() {
+          if (focusedRafPending) return;
+          focusedRafPending = true;
+          requestAnimationFrame(() => {
+            updateFocusedLighting();
+            focusedRafPending = false;
+          });
+        }
+
+        tempSliderFocused.addEventListener('input', throttledUpdateFocusedLighting);
+        brightSliderFocused.addEventListener('input', throttledUpdateFocusedLighting);
+
+        presetBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const temp = btn.dataset.temp;
+                tempSliderFocused.value = temp;
+                updateFocusedLighting();
+            });
+        });
+
+        updateFocusedLighting();
+
+        const focusedObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              if (warmOrb) {
+                  warmOrb.style.transition = 'opacity 1.2s ease, background 0.4s ease';
+                  warmOrb.style.opacity = '1';
+              }
+            }
+          });
+        }, { threshold: 0.05 });
+
+        focusedObserver.observe(focusedSection);
+      }
+      // --- END FOCUSED BRILLIANCE LOGIC ---
+
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Focused Brilliance",
+  "presets": [
+    {
+      "name": "Focused Brilliance",
+      "category": "Custom Sections"
+    }
+  ]
+}
+{% endschema %}

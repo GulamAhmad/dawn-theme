@@ -17,14 +17,36 @@
 
       <div class="product-wrap">
         <div class="product-tilt" id="stats-product-tilt">
-          <img src="{{ 'rgb3.png' | asset_url }}" alt="Wing Position 1" class="wing-img active" loading="lazy" decoding="async" />
-          <img src="{{ 'rgb2.png' | asset_url }}" alt="Wing Position 2" class="wing-img" loading="lazy" decoding="async" />
-          <img src="{{ 'rgb1.png' | asset_url }}" alt="Wing Position 3" class="wing-img" loading="lazy" decoding="async" />
+          {% if section.blocks.size > 0 %}
+            {% for block in section.blocks %}
+              {% if block.settings.image %}
+                <img src="{{ block.settings.image | image_url: width: 800 }}" alt="{{ block.settings.caption | escape }}" class="wing-img {% if forloop.first %}active{% endif %}" loading="lazy" decoding="async" {{ block.shopify_attributes }} />
+              {% else %}
+                {% if forloop.index == 1 %}
+                  <img src="{{ 'rgb3.png' | asset_url }}" alt="{{ block.settings.caption | escape }}" class="wing-img {% if forloop.first %}active{% endif %}" loading="lazy" decoding="async" {{ block.shopify_attributes }} />
+                {% elsif forloop.index == 2 %}
+                  <img src="{{ 'rgb2.png' | asset_url }}" alt="{{ block.settings.caption | escape }}" class="wing-img {% if forloop.first %}active{% endif %}" loading="lazy" decoding="async" {{ block.shopify_attributes }} />
+                {% else %}
+                  <img src="{{ 'rgb1.png' | asset_url }}" alt="{{ block.settings.caption | escape }}" class="wing-img {% if forloop.first %}active{% endif %}" loading="lazy" decoding="async" {{ block.shopify_attributes }} />
+                {% endif %}
+              {% endif %}
+            {% endfor %}
+          {% else %}
+            <img src="{{ 'rgb3.png' | asset_url }}" alt="Wing Position 1" class="wing-img active" loading="lazy" decoding="async" />
+            <img src="{{ 'rgb2.png' | asset_url }}" alt="Wing Position 2" class="wing-img" loading="lazy" decoding="async" />
+            <img src="{{ 'rgb1.png' | asset_url }}" alt="Wing Position 3" class="wing-img" loading="lazy" decoding="async" />
+          {% endif %}
         </div>
         <div class="slideshow-controls justify-center mt-8">
-           <div class="slide-dot active" data-index="0"></div>
-           <div class="slide-dot" data-index="1"></div>
-           <div class="slide-dot" data-index="2"></div>
+          {% if section.blocks.size > 0 %}
+            {% for block in section.blocks %}
+              <div class="slide-dot {% if forloop.first %}active{% endif %}" data-index="{{ forloop.index0 }}"></div>
+            {% endfor %}
+          {% else %}
+            <div class="slide-dot active" data-index="0"></div>
+            <div class="slide-dot" data-index="1"></div>
+            <div class="slide-dot" data-index="2"></div>
+          {% endif %}
         </div>
       </div>
     </div>
@@ -37,9 +59,15 @@
       </div>
 
       <div class="wing-captions-container">
-        <h2 class="wing-caption active">Shape the light your way.</h2>
-        <h2 class="wing-caption">One form. Multiple moods.</h2>
-        <h2 class="wing-caption">Adjust the wings. Transform the space.</h2>
+        {% if section.blocks.size > 0 %}
+          {% for block in section.blocks %}
+            <h2 class="wing-caption {% if forloop.first %}active{% endif %}">{{ block.settings.caption }}</h2>
+          {% endfor %}
+        {% else %}
+          <h2 class="wing-caption active">Shape the light your way.</h2>
+          <h2 class="wing-caption">One form. Multiple moods.</h2>
+          <h2 class="wing-caption">Adjust the wings. Transform the space.</h2>
+        {% endif %}
       </div>
 
       <div class="stats-row-container">
@@ -85,13 +113,56 @@
 
       function updateSlide(index) {
         if (wingImages.length === 0) return;
-        wingImages.forEach(img => img.classList.remove('active'));
-        wingCaptions.forEach(cap => cap.classList.remove('active'));
-        slideDots.forEach(dot => dot.classList.remove('active'));
+        
+        let oldActive = -1;
+        wingImages.forEach((img, i) => {
+           if (img.classList.contains('active')) {
+               oldActive = i;
+           }
+        });
+
+        let isNext = true;
+        if (oldActive !== -1) {
+           if (index === 0 && oldActive === wingImages.length - 1) isNext = true;
+           else if (index === wingImages.length - 1 && oldActive === 0) isNext = false;
+           else if (index > oldActive) isNext = true;
+           else isNext = false;
+        }
+
+        wingImages.forEach((img, i) => {
+          img.classList.remove('active', 'slide-left');
+          if (wingCaptions[i]) wingCaptions[i].classList.remove('active', 'slide-left');
+          if (slideDots[i]) slideDots[i].classList.remove('active');
+        });
+
+        if (oldActive !== -1) {
+            if (isNext) {
+                wingImages[oldActive].classList.add('slide-left');
+                if (wingCaptions[oldActive]) wingCaptions[oldActive].classList.add('slide-left');
+            }
+        }
+
+        if (!isNext) {
+            wingImages[index].style.transition = 'none';
+            wingImages[index].classList.add('slide-left');
+            if (wingCaptions[index]) {
+                wingCaptions[index].style.transition = 'none';
+                wingCaptions[index].classList.add('slide-left');
+            }
+            
+            void wingImages[index].offsetWidth; // trigger reflow
+            
+            wingImages[index].style.transition = '';
+            wingImages[index].classList.remove('slide-left');
+            if (wingCaptions[index]) {
+                wingCaptions[index].style.transition = '';
+                wingCaptions[index].classList.remove('slide-left');
+            }
+        }
 
         wingImages[index].classList.add('active');
-        wingCaptions[index].classList.add('active');
-        slideDots[index].classList.add('active');
+        if (wingCaptions[index]) wingCaptions[index].classList.add('active');
+        if (slideDots[index]) slideDots[index].classList.add('active');
       }
 
       function nextSlide() {
@@ -100,7 +171,62 @@
         updateSlide(currentSlide);
       }
 
+      function prevSlide() {
+        if (wingImages.length === 0) return;
+        currentSlide = (currentSlide - 1 + wingImages.length) % wingImages.length;
+        updateSlide(currentSlide);
+      }
+
       function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
+
+      // Swipe functionality
+      let touchStartX = 0;
+      let touchEndX = 0;
+      const swipeThreshold = 50;
+      const productWrap = wingSection.querySelector('.product-wrap');
+      let isDragging = false;
+      
+      if (productWrap) {
+        productWrap.addEventListener('touchstart', (e) => {
+          touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        productWrap.addEventListener('touchend', (e) => {
+          touchEndX = e.changedTouches[0].screenX;
+          handleSwipe();
+        }, { passive: true });
+        
+        productWrap.addEventListener('mousedown', (e) => {
+          isDragging = true;
+          touchStartX = e.screenX;
+        });
+        
+        productWrap.addEventListener('mouseup', (e) => {
+          if (!isDragging) return;
+          isDragging = false;
+          touchEndX = e.screenX;
+          handleSwipe();
+        });
+        
+        productWrap.addEventListener('mouseleave', () => {
+          if (isDragging) {
+            isDragging = false;
+          }
+        });
+      }
+
+      function handleSwipe() {
+        const diff = touchStartX - touchEndX;
+        if (Math.abs(diff) > swipeThreshold) {
+          clearInterval(slideInterval);
+          if (diff > 0) {
+            nextSlide(); // Swiped left
+          } else {
+            prevSlide(); // Swiped right
+          }
+          slideInterval = setInterval(nextSlide, 3500);
+        }
+      }
 
       const wingObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -191,10 +317,51 @@
 {% schema %}
 {
   "name": "Custom Wing",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "limit": 5,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "caption",
+          "label": "Caption",
+          "default": "Slide caption"
+        }
+      ]
+    }
+  ],
   "presets": [
     {
       "name": "Custom Wing",
-      "category": "Custom Sections"
+      "category": "Custom Sections",
+      "blocks": [
+        {
+          "type": "slide",
+          "settings": {
+            "caption": "Shape the light your way."
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "caption": "One form. Multiple moods."
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "caption": "Adjust the wings. Transform the space."
+          }
+        }
+      ]
     }
   ]
 }

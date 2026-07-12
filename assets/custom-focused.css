@@ -1,0 +1,511 @@
+/* --- FOCUSED BRILLIANCE SECTION --- */
+section.focused {
+  background: #060810;
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  padding: 120px 48px;
+  box-sizing: border-box;
+  --temp-k: 4000;
+  --brightness: 80;
+  --warm-opacity: 0.18;
+  --cool-opacity: 0.06;
+}
+
+.focused-ambient {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.focused-orb {
+  position: absolute;
+  pointer-events: none;
+  filter: blur(100px);
+  will-change: transform, opacity;
+  transform: translateZ(0);
+}
+
+.orb-warm {
+  width: 600px;
+  height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(255,180,0, var(--warm-opacity)) 0%, transparent 70%);
+  transition: background 0.4s ease, opacity 1.2s ease;
+  bottom: -50px;
+  left: 5%;
+  opacity: 0;
+}
+
+.orb-cool {
+  width: 500px;
+  height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(180,220,255, var(--cool-opacity)) 0%, transparent 70%);
+  transition: background 0.4s ease;
+  top: -30px;
+  right: 10%;
+}
+
+.orb-neutral {
+  width: 700px;
+  height: 300px;
+  background: rgba(40,0,80,0.10);
+  filter: blur(120px);
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%) translateZ(0);
+  border-radius: 50%;
+  will-change: transform;
+}
+
+.focused-grid-lines {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+.focused .section-inner {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 80px;
+  align-items: center;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 10;
+}
+
+.focused .image-col {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+  opacity: 0;
+  transform: translateX(-30px);
+}
+
+.focused.visible .image-col {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 1s cubic-bezier(0.16,1,0.3,1), transform 1s cubic-bezier(0.16,1,0.3,1);
+}
+
+.focused-eyebrow-line {
+  width: 32px;
+  height: 1px;
+  background: #ffb400;
+}
+
+.focused-eyebrow-text {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+}
+
+.focused-headline {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(56px, 6.5vw, 80px);
+  line-height: 0.92;
+  letter-spacing: 0.02em;
+  margin-bottom: 48px;
+  color: #fff;
+  text-align: left;
+}
+
+.focused-hl-amber {
+  color: #ffb400;
+}
+
+.focused-subtext {
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.4);
+  max-width: 420px;
+  margin-bottom: 48px;
+}
+
+.focused .image-frame {
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  border: 0.5px solid rgba(255,255,255,0.06);
+}
+
+.focused .image-frame img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: filter 0.4s ease;
+  will-change: filter;
+  transform: translateZ(0);
+}
+
+.focused .image-frame::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  pointer-events: none;
+  box-shadow: inset 0 0 60px rgba(255,180,0, var(--warm-opacity)),
+              inset 0 0 40px rgba(180,220,255, var(--cool-opacity));
+  transition: box-shadow 0.4s ease;
+}
+
+.temp-label {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  background: rgba(6,8,16,0.75);
+  backdrop-filter: blur(12px);
+  border: 0.5px solid rgba(255,255,255,0.08);
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: #ffb400;
+  transition: color 0.4s ease;
+  z-index: 2;
+}
+
+.focused .control-panel {
+  background: rgba(255,255,255,0.03);
+  border: 0.5px solid rgba(255,255,255,0.08);
+  border-radius: 20px;
+  padding: 40px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(24px) scale(0.98) translateZ(0);
+  will-change: transform, opacity;
+}
+
+.focused.visible .control-panel {
+  opacity: 1;
+  transform: translateY(0) scale(1) translateZ(0);
+  transition: opacity 0.9s ease 0.2s, transform 0.9s ease 0.2s;
+}
+
+.focused .control-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 50% 0%, rgba(255,180,0,0.05) 0%, transparent 60%);
+  transition: background 0.4s ease;
+}
+
+.focused .control-panel.cool-panel::before {
+  background: radial-gradient(ellipse at 50% 0%, rgba(180,220,255,0.05) 0%, transparent 60%);
+}
+
+.panel-header {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.25);
+  margin-bottom: 32px;
+}
+
+.slider-block {
+  margin-bottom: 40px;
+}
+
+.slider-block.mt-40 {
+  margin-top: 40px;
+}
+
+.slider-row-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.slider-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+}
+
+.slider-value {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  color: #ffb400;
+  transition: color 0.4s ease;
+}
+
+.slider-value.brightness-val {
+  color: rgba(255,255,255,0.8);
+}
+
+.slider-track-wrap {
+  position: relative;
+  margin-bottom: 12px;
+}
+
+.slider-track {
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+}
+
+.temp-track {
+  background: linear-gradient(90deg, #ffb400 0%, #fff8e1 40%, #e8f4ff 60%, #b4dcff 100%);
+}
+
+.bright-track {
+  background: linear-gradient(90deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.8) 100%);
+}
+
+.custom-slider {
+  position: absolute;
+  inset: -8px 0;
+  width: 100%;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 2;
+  margin: 0;
+}
+
+.thumb {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #fff;
+  border: 3px solid #060810;
+  pointer-events: none;
+  transition: box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.temp-thumb {
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.3), 0 0 12px rgba(255,180,0,0.4);
+}
+
+.bright-thumb {
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.3), 0 0 12px rgba(255,255,255,0.3);
+}
+
+.slider-row-bottom {
+  display: flex;
+  justify-content: space-between;
+}
+
+.warm-label { font-size: 10px; color: rgba(255,180,0,0.6); }
+.neutral-label { font-size: 10px; color: rgba(255,255,255,0.25); text-align: center; }
+.cool-label { font-size: 10px; color: rgba(180,220,255,0.6); }
+.bright-min { font-size: 10px; color: rgba(255,255,255,0.2); }
+.bright-max { font-size: 10px; color: rgba(255,255,255,0.2); }
+
+.presets-container {
+  margin-top: 32px;
+}
+
+.presets-label {
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.25);
+  margin-bottom: 16px;
+}
+
+.presets-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.preset-btn {
+  background: rgba(255,255,255,0.03);
+  border: 0.5px solid rgba(255,255,255,0.08);
+  border-radius: 10px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, opacity 0.4s, transform 0.4s;
+  opacity: 0;
+  transform: translateY(10px);
+  text-align: left;
+}
+
+.focused.visible .preset-btn {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.focused.visible .preset-btn:nth-child(1) { transition-delay: 0.4s; }
+.focused.visible .preset-btn:nth-child(2) { transition-delay: 0.5s; }
+.focused.visible .preset-btn:nth-child(3) { transition-delay: 0.6s; }
+.focused.visible .preset-btn:nth-child(4) { transition-delay: 0.7s; }
+
+.preset-btn.active {
+  background: rgba(255,255,255,0.07);
+  border-color: rgba(255,255,255,0.2);
+}
+
+.preset-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.preset-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.preset-name {
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.7);
+}
+
+.preset-kelvin {
+  font-size: 10px;
+  color: rgba(255,255,255,0.3);
+}
+
+@media (max-width: 1024px) {
+  .focused .section-inner {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+  section.focused {
+    padding: 80px 32px;
+  }
+  .focused .image-col {
+    order: 1;
+  }
+  .focused .control-panel {
+    order: 2;
+    padding: 28px;
+  }
+}
+
+@media (max-width: 768px) {
+  section.focused {
+    padding: 60px 20px;
+  }
+  .temp-label {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 480px) {
+  section.focused {
+    padding: 48px 16px;
+  }
+  .focused .control-panel {
+    border-radius: 16px;
+    padding: 20px;
+  }
+  .preset-btn {
+    padding: 10px 12px;
+  }
+}
+
+/* --- MOBILE PERFORMANCE: Focused Brilliance GPU fixes --- */
+@media (max-width: 1024px) {
+  /* Drastically reduce orb blur — the #1 perf killer on mobile GPUs */
+  .focused-orb {
+    filter: blur(50px);
+    will-change: auto;
+  }
+  .focused-orb.orb-neutral {
+    filter: blur(50px);
+    will-change: auto;
+  }
+
+  /* Replace expensive backdrop-filter with solid semi-transparent bg */
+  .focused .control-panel {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: rgba(10, 12, 24, 0.92);
+  }
+
+  /* Kill grid-lines — a full-viewport repeating gradient is expensive */
+  .focused-grid-lines {
+    display: none;
+  }
+
+  /* Remove will-change: filter from image (saves a compositing layer) */
+  .focused .image-frame img {
+    will-change: auto;
+  }
+
+  /* Simplify the ::after inset glow — remove dynamic box-shadow transition */
+  .focused .image-frame::after {
+    transition: none;
+  }
+
+  /* Replace temp-label backdrop-filter with solid bg */
+  .temp-label {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: rgba(6, 8, 16, 0.88);
+  }
+}
+
+@media (max-width: 768px) {
+  /* Further reduce orb sizes so the GPU has less to rasterize */
+  .focused-orb.orb-warm {
+    width: 300px;
+    height: 200px;
+    filter: blur(40px);
+  }
+  .focused-orb.orb-cool {
+    width: 250px;
+    height: 200px;
+    filter: blur(40px);
+  }
+  .focused-orb.orb-neutral {
+    width: 350px;
+    height: 150px;
+    filter: blur(40px);
+  }
+}
+
+@media (max-width: 480px) {
+  /* Minimal orbs on small phones — just a hint of color, no expensive blur */
+  .focused-orb.orb-warm {
+    width: 200px;
+    height: 150px;
+    filter: blur(30px);
+  }
+  .focused-orb.orb-cool {
+    width: 180px;
+    height: 150px;
+    filter: blur(30px);
+  }
+  .focused-orb.orb-neutral {
+    display: none;
+  }
+}
+/* --- END MOBILE PERFORMANCE FIXES --- */
+/* --- END FOCUSED BRILLIANCE SECTION --- */

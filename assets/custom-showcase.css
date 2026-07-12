@@ -1,0 +1,317 @@
+/* ==============================================
+   CINEMATIC SHOWCASE — Horizontal Scroll Section
+   Matches the GSAP pin-scroll design from the
+   original test/index.html (#usecases section)
+   ============================================== */
+
+/* Colour tokens (scoped — mirror theme vars) */
+.showcase-section {
+  --color-magenta: #ff1478;
+  --color-cyan: #00e6d2;
+  --color-amber: #ffb400;
+  --color-dark: #060810;
+}
+
+/* Utility text colours */
+.text-brand-magenta { color: #ff1478; }
+.text-amber-500     { color: #ffb400; }
+.text-white         { color: #ffffff; }
+
+/* ─── OUTER WRAPPER ─────────────────────────── */
+.showcase-section {
+  background: #060810;
+  color: #fff;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* ─── GSAP PIN CONTAINER (desktop) ─────────── */
+.pin-container {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+/* ─── FLEX STRIP holding all panels ─────────── */
+.pin-wrap {
+  display: flex;
+  height: 100%;
+  /* 3 panels × 100vw — update if you add/remove panels */
+  width: 300vw;
+}
+
+/* ─── SINGLE PANEL (one "slide") ────────────── */
+.showcase-panel {
+  width: 100vw;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* ─── AMBIENT BACKGROUND LAYER ──────────────── */
+.showcase-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.showcase-orb {
+  position: absolute;
+  width: 50vw;
+  height: 50vw;
+  max-width: 600px;
+  max-height: 600px;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.15;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Orb colour variants */
+.showcase-orb.orb-rgb-m  { background: #ff1478;  right: 20%; top: 70%; }
+.showcase-orb.orb-rgb-c  { background: #00e6d2;  left: 20%;  top: 30%; }
+.showcase-orb.orb-warm   { background: #ffb400;  left: 10%;  }
+.showcase-orb.orb-neutral { background: #ffffff; opacity: 0.1; right: 10%; }
+.showcase-orb.orb-a      { background: #ffb400;  left: 50%;  top: 50%;
+                            transform: translate(-50%, -50%); opacity: 0.1; }
+
+.showcase-grid-lines {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 80px 80px;
+}
+
+/* ─── CONTENT GRID (text + visuals) ─────────── */
+.showcase-content {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 1400px;
+  padding: 0 48px;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 80px;
+  align-items: center;
+}
+
+/* Reversed layout for alternate panels */
+.showcase-content.reverse {
+  grid-template-columns: 1.2fr 1fr;
+}
+.showcase-content.reverse .showcase-text-content { order: 2; }
+.showcase-content.reverse .showcase-visual        { order: 1; }
+
+/* ─── TEXT COLUMN ───────────────────────────── */
+.showcase-text-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.showcase-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.showcase-eyebrow .eyebrow-line {
+  width: 32px;
+  height: 1px;
+  background: #00e6d2;
+  flex-shrink: 0;
+}
+.showcase-eyebrow span {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  color: rgba(255, 255, 255, 0.4);
+  text-transform: uppercase;
+}
+
+.showcase-headline {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(48px, 6vw, 72px);
+  line-height: 0.9;
+  letter-spacing: 0.02em;
+  margin: 0 0 24px 0;
+  color: #fff;
+}
+
+/* ─── VISUAL COLUMN ─────────────────────────── */
+.showcase-visual {
+  position: relative;
+  width: 100%;
+  height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ─── DUAL-IMAGE LAYOUT ──────────────────────── */
+.dual-image {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  width: 100%;
+  height: 100%;
+}
+
+.dual-image .img-wrapper {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: transform 0.4s ease;
+  flex-shrink: 0;
+}
+
+.dual-image .img-wrapper:hover {
+  transform: translateY(-8px);
+}
+
+/* Main image is wider */
+.dual-image .main-img {
+  width: 55%;
+  height: auto;
+  align-self: center;
+}
+
+/* Supplementary smaller image */
+.dual-image .sub-img {
+  width: 40%;
+  height: auto;
+  align-self: center;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.7);
+}
+
+.dual-image .img-wrapper img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+/* ================================================
+   TABLET (≤1024 px) — stack panels vertically,
+   keep native CSS scroll (GSAP disabled on mobile)
+   ================================================ */
+@media (max-width: 1024px) {
+  /* Switch off the fixed-height viewport lock */
+  .pin-container {
+    height: auto;
+    overflow: visible;
+  }
+
+  /* Horizontal native scroll strip */
+  .pin-wrap {
+    width: auto;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: 0;
+  }
+  .pin-wrap::-webkit-scrollbar { display: none; }
+
+  /* Each panel becomes a scroll-snap card */
+  .showcase-panel {
+    width: 100vw;
+    min-width: 100vw;
+    height: auto;
+    min-height: 80vh;
+    scroll-snap-align: start;
+    padding: 80px 0;
+  }
+
+  .showcase-content,
+  .showcase-content.reverse {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding: 0 24px;
+  }
+
+  /* Always keep text first on mobile */
+  .showcase-content.reverse .showcase-text-content { order: 1; }
+  .showcase-content.reverse .showcase-visual        { order: 2; }
+
+  .showcase-visual {
+    height: auto;
+  }
+
+  /* ─── KEY FIX: Stack the two images vertically on tablet/mobile ── */
+  .dual-image {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+    width: 100%;
+    height: auto;
+  }
+
+  .dual-image .main-img,
+  .dual-image .sub-img {
+    width: 100%;
+    height: auto;
+  }
+
+  /* Reduce expensive blur */
+  .showcase-orb {
+    filter: blur(50px);
+    will-change: auto;
+  }
+  .showcase-grid-lines { display: none; }
+
+  /* Lighter shadows when animating */
+  .dual-image .img-wrapper { box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4); }
+  .dual-image .sub-img     { box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); }
+}
+
+/* ================================================
+   MOBILE (≤768 px) — further optimisations
+   ================================================ */
+@media (max-width: 768px) {
+  .showcase-panel {
+    min-height: auto;
+    padding: 60px 0;
+  }
+
+  .showcase-headline {
+    font-size: clamp(38px, 10vw, 56px);
+  }
+
+  .dual-image {
+    gap: 12px;
+  }
+
+  .dual-image .img-wrapper {
+    border-radius: 10px;
+  }
+
+  /* Tiny orbs on phones */
+  .showcase-orb {
+    width: 200px;
+    height: 200px;
+    filter: blur(40px);
+  }
+}
+
+/* ================================================
+   MOBILE — class added by JS to enable mobile scroll
+   ================================================ */
+.pin-container.mobile-scroll {
+  height: auto;
+  overflow: visible;
+}

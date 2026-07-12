@@ -12,11 +12,21 @@
     "custom_music": {
       "type": "custom-music",
       "settings": {}
+    },
+    "custom_focused": {
+      "type": "custom-focused",
+      "settings": {}
+    },
+    "custom_showcase": {
+      "type": "custom-showcase",
+      "settings": {}
     }
   },
   "order": [
     "custom_hero",
     "custom_wing",
-    "custom_music"
+    "custom_music",
+    "custom_focused",
+    "custom_showcase"
   ]
 }
