@@ -8,10 +8,15 @@
     "custom_wing": {
       "type": "custom-wing",
       "settings": {}
+    },
+    "custom_music": {
+      "type": "custom-music",
+      "settings": {}
     }
   },
   "order": [
     "custom_hero",
-    "custom_wing"
+    "custom_wing",
+    "custom_music"
   ]
 }

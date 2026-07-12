@@ -13,6 +13,11 @@
     <!-- Link your custom global CSS here -->
     {{ 'custom-global.css' | asset_url | stylesheet_tag }}
     
+    <!-- GSAP & Lenis for Smooth Scrolling and Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
+    <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js" defer></script>
+
     <!-- MANDATORY: Shopify uses this to load apps and analytics -->
     {{ content_for_header }}
   </head>
@@ -28,5 +33,32 @@
     
     <!-- Your Custom Footer -->
     <!-- Your Custom Footer (Removed default footer group) -->
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // Initialize Lenis for smooth scrolling
+        const lenis = new Lenis();
+
+        // Register GSAP ScrollTrigger if it exists
+        if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+          gsap.registerPlugin(ScrollTrigger);
+          
+          lenis.on('scroll', ScrollTrigger.update);
+
+          gsap.ticker.add((time) => {
+            lenis.raf(time * 1000);
+          });
+
+          gsap.ticker.lagSmoothing(0);
+        } else {
+          // Fallback if GSAP is not loaded
+          function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+          }
+          requestAnimationFrame(raf);
+        }
+      });
+    </script>
   </body>
 </html>
