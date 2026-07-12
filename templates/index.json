@@ -24,6 +24,14 @@
     "custom_eng": {
       "type": "custom-eng",
       "settings": {}
+    },
+    "custom_real_spaces": {
+      "type": "custom-real-spaces",
+      "settings": {}
+    },
+    "custom_footer": {
+      "type": "custom-footer",
+      "settings": {}
     }
   },
   "order": [
@@ -32,6 +40,8 @@
     "custom_music",
     "custom_focused",
     "custom_showcase",
-    "custom_eng"
+    "custom_eng",
+    "custom_real_spaces",
+    "custom_footer"
   ]
 }

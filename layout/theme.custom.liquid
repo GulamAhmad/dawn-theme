@@ -12,6 +12,7 @@
     
     <!-- Link your custom global CSS here -->
     {{ 'custom-global.css' | asset_url | stylesheet_tag }}
+    {{ 'custom-loader.css' | asset_url | stylesheet_tag }}
     
     <!-- GSAP & Lenis for Smooth Scrolling and Animations -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
@@ -23,6 +24,38 @@
   </head>
   
   <body>
+
+    <!-- ═══════════════ LAMBATY LOADER ═══════════════ -->
+    <div id="lambaty-loader">
+      <div class="loader-ambient-layer">
+        <div class="loader-orb orb-c"></div>
+        <div class="loader-orb orb-m"></div>
+        <div class="loader-orb orb-a"></div>
+        <div class="loader-grid-lines"></div>
+      </div>
+
+      <div class="loader-centerpiece">
+        <div class="loader-energy-ring" id="loader-energy-ring"></div>
+        <div class="loader-glass">
+          <img
+            src="{{ 'White Logo Tag copy.png' | asset_url }}"
+            alt="LAMBATY"
+            class="loader-logo"
+          />
+        </div>
+      </div>
+
+      <div class="loader-info">
+        <div class="loader-status-line">INITIALIZING LAMBATY EXPERIENCE</div>
+        <div class="loader-progress-container">
+          <div id="lambaty-loader-bar" class="loader-progress-bar"></div>
+        </div>
+        <div class="loader-percentage"><span id="lambaty-loader-text">0</span>%</div>
+        <div class="loader-boot-text" id="lambaty-loader-boot">SYSTEM BOOT</div>
+      </div>
+    </div>
+    <!-- ═══════════════ END LAMBATY LOADER ═══════════════ -->
+
     <!-- Your Custom Navbar -->
     {% sections 'header-group' %}
     
@@ -33,6 +66,71 @@
     
     <!-- Your Custom Footer -->
     <!-- Your Custom Footer (Removed default footer group) -->
+
+    <!-- ═══════════════ LAMBATY LOADER JS ═══════════════ -->
+    <script>
+    (function () {
+      var loaderProgress = 0;
+      var loaderText  = document.getElementById('lambaty-loader-text');
+      var loaderBar   = document.getElementById('lambaty-loader-bar');
+      var loader      = document.getElementById('lambaty-loader');
+      var loaderBoot  = document.getElementById('lambaty-loader-boot');
+
+      // Tick up to 90 % quickly while page loads
+      var loadInterval = setInterval(function () {
+        if (loaderProgress < 90) {
+          loaderProgress += Math.floor(Math.random() * 8) + 4;
+          if (loaderProgress > 90) loaderProgress = 90;
+          if (loaderText) loaderText.innerText = loaderProgress;
+          if (loaderBar)  loaderBar.style.width  = loaderProgress + '%';
+        }
+      }, 30);
+
+      window.addEventListener('load', function () {
+        clearInterval(loadInterval);
+        loaderProgress = 100;
+        if (loaderText) loaderText.innerText = loaderProgress;
+        if (loaderBar)  loaderBar.style.width  = loaderProgress + '%';
+
+        if (loaderBoot) {
+          loaderBoot.style.opacity = 0;
+          setTimeout(function () {
+            loaderBoot.innerText    = 'EXPERIENCE READY';
+            loaderBoot.style.opacity = 1;
+          }, 100);
+        }
+
+        // Dismiss with GSAP if available, plain CSS otherwise
+        if (loader) {
+          loader.classList.add('finishing');
+          setTimeout(function () {
+            if (typeof gsap !== 'undefined') {
+              gsap.to(loader, {
+                opacity : 0,
+                scale   : 1.05,
+                duration: 0.8,
+                ease    : 'power2.inOut',
+                onComplete: function () {
+                  loader.style.display = 'none';
+                  document.body.classList.add('hero-loaded');
+                }
+              });
+            } else {
+              loader.style.transition = 'opacity 0.8s ease';
+              loader.style.opacity    = '0';
+              setTimeout(function () {
+                loader.style.display = 'none';
+                document.body.classList.add('hero-loaded');
+              }, 800);
+            }
+          }, 200);
+        } else {
+          document.body.classList.add('hero-loaded');
+        }
+      });
+    })();
+    </script>
+    <!-- ═══════════════ END LAMBATY LOADER JS ═══════════════ -->
 
     <script>
       document.addEventListener("DOMContentLoaded", () => {
@@ -58,6 +156,18 @@
           }
           requestAnimationFrame(raf);
         }
+
+        // ── Smooth anchor scroll via Lenis ────────────────
+        document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+          anchor.addEventListener('click', function (e) {
+            var href = anchor.getAttribute('href');
+            if (!href || href === '#') return;
+            var target = document.querySelector(href);
+            if (!target) return;
+            e.preventDefault();
+            lenis.scrollTo(target, { offset: 0, duration: 1.4, easing: function (t) { return 1 - Math.pow(1 - t, 4); } });
+          });
+        });
       });
     </script>
   </body>

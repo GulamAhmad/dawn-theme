@@ -1,0 +1,219 @@
+/* --- LAMBATY LOADER ANIMATION --- */
+
+#lambaty-loader {
+  position: fixed;
+  inset: 0;
+  background: #060810;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ─── Ambient Layer ────────────────────────────────────── */
+.loader-ambient-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.loader-orb {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.4;
+  animation: loaderPulseOrb 4s alternate infinite ease-in-out;
+  transition: filter 1s ease, opacity 1s ease;
+}
+
+@keyframes loaderPulseOrb {
+  0%   { transform: scale(0.9); opacity: 0.3; }
+  100% { transform: scale(1.1); opacity: 0.5; }
+}
+
+.loader-orb.orb-c {
+  width: 400px;
+  height: 400px;
+  background: rgba(0, 230, 210, 0.15);
+  filter: blur(80px);
+  top: 10%;
+  left: 20%;
+  animation-delay: 0s;
+}
+
+.loader-orb.orb-m {
+  width: 350px;
+  height: 350px;
+  background: rgba(255, 20, 120, 0.12);
+  filter: blur(80px);
+  bottom: 20%;
+  right: 20%;
+  animation-delay: 1s;
+}
+
+.loader-orb.orb-a {
+  width: 300px;
+  height: 300px;
+  background: rgba(255, 180, 0, 0.15);
+  filter: blur(80px);
+  bottom: 10%;
+  left: 30%;
+  animation-delay: 2s;
+}
+
+.loader-grid-lines {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  z-index: 1;
+}
+
+/* ─── Centerpiece (logo + ring) ────────────────────────── */
+.loader-centerpiece {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  margin-bottom: 60px;
+}
+
+.loader-energy-ring {
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0%,
+    #00e6d2 25%,
+    #ff1478 50%,
+    #ffb400 75%,
+    transparent 100%
+  );
+  animation: rotateLoaderRing 4s linear infinite;
+  z-index: -1;
+  filter: blur(8px);
+  opacity: 0.8;
+  transition: animation-duration 1s ease;
+}
+
+.loader-energy-ring::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0%,
+    #00e6d2 25%,
+    #ff1478 50%,
+    #ffb400 75%,
+    transparent 100%
+  );
+  filter: blur(2px);
+}
+
+@keyframes rotateLoaderRing {
+  to { transform: rotate(360deg); }
+}
+
+.loader-glass {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: rgba(6, 8, 16, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loader-logo {
+  width: 120px;
+  opacity: 0.9;
+}
+
+/* ─── Info Block ───────────────────────────────────────── */
+.loader-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 10;
+  width: 100%;
+  max-width: 400px;
+  padding: 0 24px;
+  box-sizing: border-box;
+}
+
+.loader-status-line {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+  margin-bottom: 24px;
+}
+
+.loader-progress-container {
+  width: 100%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+  position: relative;
+  margin-bottom: 24px;
+}
+
+.loader-progress-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0%;
+  background: #ffffff;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px #00e6d2;
+  transition: width 0.1s ease-out;
+}
+
+.loader-percentage {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 32px;
+  letter-spacing: 0.1em;
+  color: #ffffff;
+  margin-bottom: 12px;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+.loader-boot-text {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  color: #00e6d2;
+  height: 16px;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+/* ─── Finishing state (added via JS at 100%) ───────────── */
+#lambaty-loader.finishing .loader-energy-ring {
+  animation-duration: 1s;
+  filter: blur(16px);
+  opacity: 1;
+}
+
+#lambaty-loader.finishing .loader-orb {
+  filter: blur(60px);
+  opacity: 0.8;
+}
+
+/* --- END LAMBATY LOADER ANIMATION --- */

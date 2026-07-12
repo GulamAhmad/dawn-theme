@@ -1,0 +1,338 @@
+/* --- 3.10 SEEN IN REAL SPACES SECTION --- */
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600&display=swap');
+
+.real-spaces-section {
+  background: #060810;
+  padding: 120px 0;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ─── Ambient Background ───────────────────────────────── */
+.rs-ambient {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.rs-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+}
+
+.rs-orb-cyan {
+  width: 400px;
+  height: 400px;
+  background: rgba(0, 230, 210, 0.08);
+  top: 10%;
+  left: -10%;
+}
+
+.rs-orb-magenta {
+  width: 350px;
+  height: 350px;
+  background: rgba(255, 20, 120, 0.08);
+  bottom: -10%;
+  right: -5%;
+}
+
+.rs-grid-lines {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* ─── Section Header ───────────────────────────────────── */
+.rs-header {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  margin-bottom: 64px;
+  padding: 0 24px;
+}
+
+.rs-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.rs-eyebrow-line {
+  width: 32px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.rs-eyebrow span {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.rs-headline {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(40px, 5vw, 64px);
+  line-height: 1;
+  letter-spacing: 0.02em;
+  color: #fff;
+  margin-bottom: 16px;
+}
+
+.rs-hl {
+  color: transparent;
+  background: linear-gradient(90deg, #ff1478, #ffb400);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.rs-subtext {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 15px;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.45);
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* ─── Reel Container (Horizontal Scroll) ──────────────── */
+.reel-container {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  gap: 24px;
+  padding: 0 48px 48px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Hide scrollbar */
+.reel-container::-webkit-scrollbar {
+  display: none;
+}
+.reel-container {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ─── Reel Cards ───────────────────────────────────────── */
+.reel-card {
+  flex: 0 0 300px;
+  height: 533px; /* 9:16 aspect ratio for 300px width */
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  scroll-snap-align: center;
+  background: #111;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition:
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+  cursor: pointer;
+}
+
+.reel-card:hover {
+  transform: scale(1.02) translateY(-4px);
+  box-shadow: 0 0 40px rgba(0, 230, 210, 0.1), 0 20px 40px rgba(0, 0, 0, 0.5);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* ─── Reel Video / Image ───────────────────────────────── */
+.reel-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.5s ease;
+  background: #1a1a1a;
+}
+
+/* Placeholder background for when video has no source */
+.reel-card-placeholder {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #0e1020 0%, #181830 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.reel-placeholder-icon {
+  opacity: 0.12;
+}
+
+.reel-placeholder-icon svg {
+  width: 64px;
+  height: 64px;
+  color: #fff;
+}
+
+/* ─── Reel Overlay + Info ──────────────────────────────── */
+.reel-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 40%, rgba(6, 8, 16, 0.95) 100%);
+  pointer-events: none;
+}
+
+.reel-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  pointer-events: none;
+}
+
+.reel-badge {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  color: #ffb400;
+  text-transform: uppercase;
+}
+
+.reel-creator {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 24px;
+  letter-spacing: 0.05em;
+  color: #fff;
+  margin: 0;
+}
+
+.reel-env {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 8px;
+}
+
+.reel-env svg {
+  flex-shrink: 0;
+}
+
+.reel-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.rs-tag {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 0.5px solid rgba(255, 255, 255, 0.1);
+  border-radius: 100px;
+  padding: 4px 10px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  white-space: nowrap;
+}
+
+
+/* ─── Card Entrance Animation ──────────────────────────── */
+.rs-animate {
+  opacity: 0;
+  transform: translateY(20px) scale(0.98);
+  transition:
+    opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.rs-animate.rs-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.rs-animate:nth-child(1) { transition-delay: 0s; }
+.rs-animate:nth-child(2) { transition-delay: 0.08s; }
+.rs-animate:nth-child(3) { transition-delay: 0.16s; }
+.rs-animate:nth-child(4) { transition-delay: 0.24s; }
+.rs-animate:nth-child(5) { transition-delay: 0.32s; }
+
+/* ─── Responsive ───────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .reel-card {
+    flex: 0 0 260px;
+    height: 462px;
+  }
+}
+
+@media (max-width: 768px) {
+  .real-spaces-section {
+    padding: 80px 0;
+  }
+
+  .rs-header {
+    margin-bottom: 48px;
+  }
+
+  .reel-container {
+    padding: 0 24px 24px;
+    gap: 16px;
+  }
+
+  .reel-card {
+    flex: 0 0 240px;
+    height: 426px;
+  }
+
+  .rs-orb {
+    filter: blur(60px);
+    will-change: auto;
+  }
+
+  .rs-grid-lines {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .real-spaces-section {
+    padding: 64px 0;
+  }
+
+  .reel-card {
+    flex: 0 0 210px;
+    height: 373px;
+  }
+
+  .reel-container {
+    gap: 12px;
+    padding: 0 16px 16px;
+  }
+
+  .rs-orb-cyan,
+  .rs-orb-magenta {
+    filter: blur(40px);
+  }
+}
+
+/* --- END SEEN IN REAL SPACES SECTION --- */

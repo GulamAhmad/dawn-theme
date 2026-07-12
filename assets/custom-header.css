@@ -42,6 +42,12 @@
   -webkit-text-fill-color: #ff1478;
 }
 
+.header-logo-img {
+  width: 140px;
+  height: auto;
+  display: block;
+}
+
 .nav-links {
   display: flex;
   gap: 32px;
@@ -183,6 +189,9 @@
   }
   .nav-logo {
     font-size: 20px;
+  }
+  .header-logo-img {
+    width: 110px;
   }
   .nav-right {
     gap: 8px;
