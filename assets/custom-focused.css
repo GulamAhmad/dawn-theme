@@ -15,66 +15,9 @@ section.focused {
   --cool-opacity: 0.06;
 }
 
-.focused-ambient {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.focused-orb {
-  position: absolute;
-  pointer-events: none;
-  filter: blur(100px);
-  will-change: transform, opacity;
-  transform: translateZ(0);
-}
-
-.orb-warm {
-  width: 600px;
-  height: 400px;
-  border-radius: 50%;
-  background: radial-gradient(ellipse, rgba(255,180,0, var(--warm-opacity)) 0%, transparent 70%);
-  transition: background 0.4s ease, opacity 1.2s ease;
-  bottom: -50px;
-  left: 5%;
-  opacity: 0;
-}
-
-.orb-cool {
-  width: 500px;
-  height: 400px;
-  border-radius: 50%;
-  background: radial-gradient(ellipse, rgba(180,220,255, var(--cool-opacity)) 0%, transparent 70%);
-  transition: background 0.4s ease;
-  top: -30px;
-  right: 10%;
-}
-
-.orb-neutral {
-  width: 700px;
-  height: 300px;
-  background: rgba(40,0,80,0.10);
-  filter: blur(120px);
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%) translateZ(0);
-  border-radius: 50%;
-  will-change: transform;
-}
-
-.focused-grid-lines {
-  position: absolute;
-  inset: 0;
-  background-image: 
-    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
-  background-size: 60px 60px;
-}
-
 .focused .section-inner {
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
+  grid-template-columns: 0.9fr 1.1fr;
   gap: 80px;
   align-items: center;
   width: 100%;
@@ -84,7 +27,7 @@ section.focused {
   z-index: 10;
 }
 
-.focused .image-col {
+.focused .text-col {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -94,10 +37,23 @@ section.focused {
   transform: translateX(-30px);
 }
 
-.focused.visible .image-col {
+.focused.visible .text-col {
   opacity: 1;
   transform: translateX(0);
   transition: opacity 1s cubic-bezier(0.16,1,0.3,1), transform 1s cubic-bezier(0.16,1,0.3,1);
+}
+
+.focused .image-col {
+  position: relative;
+  width: 100%;
+  opacity: 0;
+  transform: translateX(30px);
+}
+
+.focused.visible .image-col {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 1s cubic-bezier(0.16,1,0.3,1) 0.2s, transform 1s cubic-bezier(0.16,1,0.3,1) 0.2s;
 }
 
 .focused-eyebrow-line {
@@ -119,7 +75,7 @@ section.focused {
   font-size: clamp(56px, 6.5vw, 80px);
   line-height: 0.92;
   letter-spacing: 0.02em;
-  margin-bottom: 48px;
+  margin-bottom: 20px;
   color: #fff;
   text-align: left;
 }
@@ -129,12 +85,12 @@ section.focused {
 }
 
 .focused-subtext {
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 300;
   line-height: 1.8;
   color: rgba(255,255,255,0.4);
   max-width: 420px;
-  margin-bottom: 48px;
+  margin-bottom: 14px;
 }
 
 .focused .image-frame {
@@ -167,7 +123,7 @@ section.focused {
 
 .temp-label {
   position: absolute;
-  bottom: 16px;
+  top: 16px;
   left: 16px;
   background: rgba(6,8,16,0.75);
   backdrop-filter: blur(12px);
@@ -182,146 +138,90 @@ section.focused {
   z-index: 2;
 }
 
-.focused .control-panel {
-  background: rgba(255,255,255,0.03);
-  border: 0.5px solid rgba(255,255,255,0.08);
-  border-radius: 20px;
-  padding: 40px;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  position: relative;
-  overflow: hidden;
-  opacity: 0;
-  transform: translateY(24px) scale(0.98) translateZ(0);
-  will-change: transform, opacity;
-}
-
-.focused.visible .control-panel {
-  opacity: 1;
-  transform: translateY(0) scale(1) translateZ(0);
-  transition: opacity 0.9s ease 0.2s, transform 0.9s ease 0.2s;
-}
-
-.focused .control-panel::before {
-  content: '';
+.vertical-controls-container {
   position: absolute;
   inset: 0;
-  border-radius: 20px;
   pointer-events: none;
-  background: radial-gradient(ellipse at 50% 0%, rgba(255,180,0,0.05) 0%, transparent 60%);
-  transition: background 0.4s ease;
 }
 
-.focused .control-panel.cool-panel::before {
-  background: radial-gradient(ellipse at 50% 0%, rgba(180,220,255,0.05) 0%, transparent 60%);
-}
-
-.panel-header {
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.25);
-  margin-bottom: 32px;
-}
-
-.slider-block {
-  margin-bottom: 40px;
-}
-
-.slider-block.mt-40 {
-  margin-top: 40px;
-}
-
-.slider-row-top {
+.v-control-group {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
-  margin-bottom: 16px;
+  gap: 12px;
+  pointer-events: auto;
+  z-index: 10;
 }
 
-.slider-label {
+.v-control-group.temp-side {
+  left: 10px;
+}
+
+.v-control-group.bright-side {
+  right: 10px;
+}
+
+.v-track {
+  position: relative;
+  width: 10px;
+  height: 240px;
+  border-radius: 25px;
+  background: rgba(10, 12, 24, 0.45);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.1);
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.v-fill {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  border-radius: 25px;
+  pointer-events: none;
+  box-shadow: inset 0 2px 4px rgba(255,255,255,0.3), inset 0 -2px 4px rgba(0,0,0,0.1);
+}
+
+.v-slider {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  -webkit-appearance: slider-vertical;
+  appearance: slider-vertical;
+  margin: 0;
+  z-index: 5;
+}
+
+.v-label-top {
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.5);
   text-transform: uppercase;
-  color: rgba(255,255,255,0.6);
 }
 
-.slider-value {
+.v-value {
   font-family: 'Bebas Neue', sans-serif;
   font-size: 22px;
-  color: #ffb400;
-  transition: color 0.4s ease;
-}
-
-.slider-value.brightness-val {
-  color: rgba(255,255,255,0.8);
-}
-
-.slider-track-wrap {
-  position: relative;
-  margin-bottom: 12px;
-}
-
-.slider-track {
-  width: 100%;
-  height: 4px;
-  border-radius: 2px;
-}
-
-.temp-track {
-  background: linear-gradient(90deg, #ffb400 0%, #fff8e1 40%, #e8f4ff 60%, #b4dcff 100%);
-}
-
-.bright-track {
-  background: linear-gradient(90deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.8) 100%);
-}
-
-.custom-slider {
-  position: absolute;
-  inset: -8px 0;
-  width: 100%;
-  opacity: 0;
-  cursor: pointer;
-  z-index: 2;
-  margin: 0;
-}
-
-.thumb {
-  position: absolute;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: #fff;
-  border: 3px solid #060810;
-  pointer-events: none;
-  transition: box-shadow 0.3s ease, background 0.3s ease;
-}
-
-.temp-thumb {
-  box-shadow: 0 0 0 1px rgba(255,255,255,0.3), 0 0 12px rgba(255,180,0,0.4);
-}
-
-.bright-thumb {
-  box-shadow: 0 0 0 1px rgba(255,255,255,0.3), 0 0 12px rgba(255,255,255,0.3);
-}
-
-.slider-row-bottom {
+  color: #fff;
+  margin-top: 2px;
   display: flex;
-  justify-content: space-between;
+  align-items: center;
+  gap: 6px;
 }
-
-.warm-label { font-size: 10px; color: rgba(255,180,0,0.6); }
-.neutral-label { font-size: 10px; color: rgba(255,255,255,0.25); text-align: center; }
-.cool-label { font-size: 10px; color: rgba(180,220,255,0.6); }
-.bright-min { font-size: 10px; color: rgba(255,255,255,0.2); }
-.bright-max { font-size: 10px; color: rgba(255,255,255,0.2); }
 
 .presets-container {
-  margin-top: 32px;
+  margin-top: 24px;
+  width: 100%;
 }
 
 .presets-label {
@@ -399,12 +299,11 @@ section.focused {
   section.focused {
     padding: 80px 32px;
   }
-  .focused .image-col {
+  .focused .text-col {
     order: 1;
   }
-  .focused .control-panel {
+  .focused .image-col {
     order: 2;
-    padding: 28px;
   }
 }
 
@@ -421,9 +320,22 @@ section.focused {
   section.focused {
     padding: 48px 16px;
   }
-  .focused .control-panel {
-    border-radius: 16px;
-    padding: 20px;
+  .v-control-group.temp-side {
+    left: 10px;
+  }
+  .v-control-group.bright-side {
+    right: 10px;
+  }
+  .v-track {
+    width: 10px;
+    height: 180px;
+    border-radius: 20px;
+  }
+  .v-fill {
+    border-radius: 20px;
+  }
+  .v-value {
+    font-size: 18px;
   }
   .preset-btn {
     padding: 10px 12px;
@@ -432,26 +344,11 @@ section.focused {
 
 /* --- MOBILE PERFORMANCE: Focused Brilliance GPU fixes --- */
 @media (max-width: 1024px) {
-  /* Drastically reduce orb blur — the #1 perf killer on mobile GPUs */
-  .focused-orb {
-    filter: blur(50px);
-    will-change: auto;
-  }
-  .focused-orb.orb-neutral {
-    filter: blur(50px);
-    will-change: auto;
-  }
-
   /* Replace expensive backdrop-filter with solid semi-transparent bg */
-  .focused .control-panel {
+  .v-track {
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
-    background: rgba(10, 12, 24, 0.92);
-  }
-
-  /* Kill grid-lines — a full-viewport repeating gradient is expensive */
-  .focused-grid-lines {
-    display: none;
+    background: rgba(10, 12, 24, 0.85);
   }
 
   /* Remove will-change: filter from image (saves a compositing layer) */
@@ -472,40 +369,6 @@ section.focused {
   }
 }
 
-@media (max-width: 768px) {
-  /* Further reduce orb sizes so the GPU has less to rasterize */
-  .focused-orb.orb-warm {
-    width: 300px;
-    height: 200px;
-    filter: blur(40px);
-  }
-  .focused-orb.orb-cool {
-    width: 250px;
-    height: 200px;
-    filter: blur(40px);
-  }
-  .focused-orb.orb-neutral {
-    width: 350px;
-    height: 150px;
-    filter: blur(40px);
-  }
-}
 
-@media (max-width: 480px) {
-  /* Minimal orbs on small phones — just a hint of color, no expensive blur */
-  .focused-orb.orb-warm {
-    width: 200px;
-    height: 150px;
-    filter: blur(30px);
-  }
-  .focused-orb.orb-cool {
-    width: 180px;
-    height: 150px;
-    filter: blur(30px);
-  }
-  .focused-orb.orb-neutral {
-    display: none;
-  }
-}
 /* --- END MOBILE PERFORMANCE FIXES --- */
 /* --- END FOCUSED BRILLIANCE SECTION --- */
