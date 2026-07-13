@@ -398,6 +398,18 @@
   .wave-labels {
     max-width: 100%;
   }
+  
+  /* Move beat visualization to the top of the copy column */
+  .beat-section .soundwave {
+    order: -3;
+  }
+  .beat-section .wave-baseline {
+    order: -2;
+  }
+  .beat-section .wave-labels {
+    order: -1;
+    margin-bottom: 48px;
+  }
 }
 
 @media (max-width: 768px) {

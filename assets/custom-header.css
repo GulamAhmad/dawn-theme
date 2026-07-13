@@ -184,6 +184,16 @@
   transform: scale(1.02);
 }
 
+/* RTL SUPPORT */
+[dir="rtl"] .nav-links a::after {
+  transform-origin: right;
+}
+
+[dir="rtl"] .lang-switcher {
+  margin-right: 8px;
+  margin-left: 0;
+}
+
 @media (max-width: 1024px) {
   .hero-navbar {
     padding: 0 24px;

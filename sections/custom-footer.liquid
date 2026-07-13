@@ -22,34 +22,34 @@
         <a href="/" class="footer-logo-link">
           <img src="{{ 'White Logo Tag copy.png' | asset_url }}" alt="LAMBATY" class="footer-logo-img" />
         </a>
-        <p class="footer-tagline">Illuminate Your Universe.</p>
+        <p class="footer-tagline">{% if request.locale.iso_code == 'ar' %}أضئ عالمك.{% else %}Illuminate Your Universe.{% endif %}</p>
       </div>
 
       <!-- Explore Column -->
       <div class="footer-col">
-        <h4 class="col-title">Explore</h4>
+        <h4 class="col-title">{% if request.locale.iso_code == 'ar' %}استكشف{% else %}Explore{% endif %}</h4>
         <ul class="footer-links">
-          <li><a href="#stats-section">RGB Experience</a></li>
-          <li><a href="#productivity">Productivity</a></li>
-          <li><a href="#engineering">Engineering</a></li>
-          <li><a href="#socials">Community</a></li>
+          <li><a href="#stats-section">{% if request.locale.iso_code == 'ar' %}تجربة RGB{% else %}RGB Experience{% endif %}</a></li>
+          <li><a href="#productivity">{% if request.locale.iso_code == 'ar' %}الإنتاجية{% else %}Productivity{% endif %}</a></li>
+          <li><a href="#engineering">{% if request.locale.iso_code == 'ar' %}الهندسة{% else %}Engineering{% endif %}</a></li>
+          <li><a href="#socials">{% if request.locale.iso_code == 'ar' %}المجتمع{% else %}Community{% endif %}</a></li>
         </ul>
       </div>
 
       <!-- Support Column -->
       <div class="footer-col">
-        <h4 class="col-title">Support</h4>
+        <h4 class="col-title">{% if request.locale.iso_code == 'ar' %}الدعم{% else %}Support{% endif %}</h4>
         <ul class="footer-links">
-          <li><a href="{{ section.settings.faq_url | default: '#' }}">FAQs</a></li>
-          <li><a href="{{ section.settings.warranty_url | default: '#' }}">Warranty</a></li>
-          <li><a href="{{ section.settings.contact_url | default: '#' }}">Contact</a></li>
-          <li><a href="{{ section.settings.shipping_url | default: '#' }}">Shipping</a></li>
+          <li><a href="{{ section.settings.faq_url | default: '#' }}">{% if request.locale.iso_code == 'ar' %}الأسئلة الشائعة{% else %}FAQs{% endif %}</a></li>
+          <li><a href="{{ section.settings.warranty_url | default: '#' }}">{% if request.locale.iso_code == 'ar' %}الضمان{% else %}Warranty{% endif %}</a></li>
+          <li><a href="{{ section.settings.contact_url | default: '#' }}">{% if request.locale.iso_code == 'ar' %}اتصل بنا{% else %}Contact{% endif %}</a></li>
+          <li><a href="{{ section.settings.shipping_url | default: '#' }}">{% if request.locale.iso_code == 'ar' %}الشحن{% else %}Shipping{% endif %}</a></li>
         </ul>
       </div>
 
       <!-- Connect / Socials Column -->
       <div class="footer-col">
-        <h4 class="col-title st">Connect</h4>
+        <h4 class="col-title st">{% if request.locale.iso_code == 'ar' %}تواصل معنا{% else %}Connect{% endif %}</h4>
         <div class="footer-social-links">
 
           <!-- Instagram -->
@@ -120,7 +120,7 @@
       <div class="bottom-left">
         <span>&copy; {{ 'now' | date: '%Y' }} LAMBATY</span>
         <span class="bottom-separator"></span>
-        <span>Built for creators, gamers, and modern workspaces.</span>
+        <span>{% if request.locale.iso_code == 'ar' %}صُمم للمبدعين، واللاعبين، ومساحات العمل الحديثة.{% else %}Built for creators, gamers, and modern workspaces.{% endif %}</span>
       </div>
       <div class="bottom-right">
         {%- for policy in shop.policies -%}
@@ -129,9 +129,9 @@
           {%- endif -%}
         {%- endfor -%}
         {%- if shop.policies.size == 0 -%}
-          <a href="#">Privacy</a>
-          <a href="#">Terms</a>
-          <a href="#">Support</a>
+          <a href="#">{% if request.locale.iso_code == 'ar' %}الخصوصية{% else %}Privacy{% endif %}</a>
+          <a href="#">{% if request.locale.iso_code == 'ar' %}الشروط{% else %}Terms{% endif %}</a>
+          <a href="#">{% if request.locale.iso_code == 'ar' %}الدعم{% else %}Support{% endif %}</a>
         {%- endif -%}
       </div>
     </div>

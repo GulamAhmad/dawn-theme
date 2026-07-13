@@ -15,11 +15,16 @@
           <div class="showcase-text-content" data-speed="1.15">
             <div class="showcase-eyebrow">
               <div class="eyebrow-line"></div>
-              <span>GAMING SETUP</span>
+              <span>{% if request.locale.iso_code == 'ar' %}إعداد الألعاب{% else %}GAMING SETUP{% endif %}</span>
             </div>
             <h3 class="showcase-headline">
-              BUILT FOR
-              <span class="text-brand-magenta">IMMERSIVE</span> SETUPS.
+              {% if request.locale.iso_code == 'ar' %}
+                مصمم لإعدادات
+                <span class="text-brand-magenta">غامرة</span>.
+              {% else %}
+                BUILT FOR
+                <span class="text-brand-magenta">IMMERSIVE</span> SETUPS.
+              {% endif %}
             </h3>
           </div>
           <div class="showcase-visual dual-image" data-speed="0.95">
@@ -53,10 +58,14 @@
           <div class="showcase-text-content" data-speed="1.1">
             <div class="showcase-eyebrow">
               <div class="eyebrow-line"></div>
-              <span>HOME OFFICE SETUP</span>
+              <span>{% if request.locale.iso_code == 'ar' %}إعداد المكتب المنزلي{% else %}HOME OFFICE SETUP{% endif %}</span>
             </div>
             <h3 class="showcase-headline">
-              A CLEANER DESK. <br /><span class="text-amber-500">A CALMER WORKFLOW.</span>
+              {% if request.locale.iso_code == 'ar' %}
+                مكتب أنظف. <br /><span class="text-amber-500">سير عمل أهدأ.</span>
+              {% else %}
+                A CLEANER DESK. <br /><span class="text-amber-500">A CALMER WORKFLOW.</span>
+              {% endif %}
             </h3>
           </div>
           <div class="showcase-visual dual-image" data-speed="0.92">
@@ -90,10 +99,14 @@
           <div class="showcase-text-content" data-speed="1.2">
             <div class="showcase-eyebrow">
               <div class="eyebrow-line"></div>
-              <span>BEDROOM SETUP</span>
+              <span>{% if request.locale.iso_code == 'ar' %}إعداد غرفة النوم{% else %}BEDROOM SETUP{% endif %}</span>
             </div>
             <h3 class="showcase-headline">
-              SOFTER LIGHT FOR <span class="text-white">SLOWER HOURS.</span>
+              {% if request.locale.iso_code == 'ar' %}
+                إضاءة أنعم للساعات <span class="text-white">الهادئة.</span>
+              {% else %}
+                SOFTER LIGHT FOR <span class="text-white">SLOWER HOURS.</span>
+              {% endif %}
             </h3>
           </div>
           <div class="showcase-visual dual-image" data-speed="0.95">
@@ -125,23 +138,28 @@
   (function () {
     function initShowcase() {
       if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
-        // GSAP not yet ready, retry once after a short delay
         setTimeout(initShowcase, 300);
         return;
       }
 
       const showcasePanels = gsap.utils.toArray('.showcase-panel');
       const pinWrap = document.querySelector('.pin-wrap');
+      const pinContainer = document.querySelector('.pin-container');
 
       if (!showcasePanels.length || !pinWrap) return;
 
       const isMobile = window.innerWidth <= 768;
+      const isRTL = document.documentElement.getAttribute('dir') === 'rtl';
 
       if (isMobile) {
-        // On mobile: disable GSAP pin — let native CSS snap-scroll take over
-        // The CSS already handles this with overflow-x: auto on .pin-wrap
-        document.querySelector('.pin-container').classList.add('mobile-scroll');
+        if (pinContainer) pinContainer.classList.add('mobile-scroll');
         return;
+      }
+
+      // Force the scroll strip to LTR so GSAP's xPercent math stays consistent.
+      // The text content inside panels still inherits RTL from its own styling.
+      if (isRTL) {
+        pinWrap.style.direction = 'ltr';
       }
 
       let scrollTween = gsap.to(showcasePanels, {

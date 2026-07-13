@@ -7,21 +7,21 @@
         <div class="text-col">
           <div class="eyebrow-row">
             <div class="focused-eyebrow-line"></div>
-            <span class="focused-eyebrow-text">PRODUCTIVITY MODE</span>
+            <span class="focused-eyebrow-text">{% if request.locale.iso_code == 'ar' %}وضع الإنتاجية{% else %}PRODUCTIVITY MODE{% endif %}</span>
           </div>
 
           <h2 class="focused-headline">
-            FOCUSED <span class="focused-hl-amber">BRILLIANCE</span>
+            {% if request.locale.iso_code == 'ar' %}تألق <span class="focused-hl-amber">مركّز</span>{% else %}FOCUSED <span class="focused-hl-amber">BRILLIANCE</span>{% endif %}
           </h2>
 
           <p class="focused-subtext">
-            Switch between warm candlelight and crisp cool white. Perfect
-            illumination for reading, deep work, or winding down.
+            {% if request.locale.iso_code == 'ar' %}بدّل بين ضوء الشموع الدافئ والأبيض البارد. إضاءة مثالية للقراءة، أو العمل العميق، أو الاسترخاء.{% else %}Switch between warm candlelight and crisp cool white. Perfect
+            illumination for reading, deep work, or winding down.{% endif %}
           </p>
 
           <!-- COLOR TEMPERATURE PRESETS -->
           <div class="presets-container">
-            <div class="presets-label">PRESETS</div>
+            <div class="presets-label">{% if request.locale.iso_code == 'ar' %}إعدادات مسبقة{% else %}PRESETS{% endif %}</div>
             <div class="presets-grid">
               <button class="preset-btn" data-temp="2700">
                 <div
@@ -29,7 +29,7 @@
                   style="background: #ff9a3c; box-shadow: 0 0 8px #ff9a3c"
                 ></div>
                 <div class="preset-info">
-                  <div class="preset-name">Candlelight</div>
+                  <div class="preset-name">{% if request.locale.iso_code == 'ar' %}ضوء شموع{% else %}Candlelight{% endif %}</div>
                   <div class="preset-kelvin">2700K</div>
                 </div>
               </button>
@@ -39,7 +39,7 @@
                   style="background: #ffcf7a; box-shadow: 0 0 8px #ffcf7a"
                 ></div>
                 <div class="preset-info">
-                  <div class="preset-name">Warm White</div>
+                  <div class="preset-name">{% if request.locale.iso_code == 'ar' %}أبيض دافئ{% else %}Warm White{% endif %}</div>
                   <div class="preset-kelvin">4000K</div>
                 </div>
               </button>
@@ -49,7 +49,7 @@
                   style="background: #fff5e0; box-shadow: 0 0 8px #fff5e0"
                 ></div>
                 <div class="preset-info">
-                  <div class="preset-name">Daylight</div>
+                  <div class="preset-name">{% if request.locale.iso_code == 'ar' %}ضوء النهار{% else %}Daylight{% endif %}</div>
                   <div class="preset-kelvin">5500K</div>
                 </div>
               </button>
@@ -59,7 +59,7 @@
                   style="background: #b4dcff; box-shadow: 0 0 8px #b4dcff"
                 ></div>
                 <div class="preset-info">
-                  <div class="preset-name">Cool White</div>
+                  <div class="preset-name">{% if request.locale.iso_code == 'ar' %}أبيض بارد{% else %}Cool White{% endif %}</div>
                   <div class="preset-kelvin">6500K</div>
                 </div>
               </button>
@@ -83,7 +83,7 @@
             <div class="vertical-controls-container">
               <!-- TEMPERATURE -->
               <div class="v-control-group temp-side">
-                <div class="v-label-top">TEMP</div>
+                <div class="v-label-top">{% if request.locale.iso_code == 'ar' %}الحرارة{% else %}TEMP{% endif %}</div>
                 <div class="v-track">
                   <div class="v-fill" id="temp-fill"></div>
                   <input type="range" min="2700" max="6500" value="4000" class="v-slider" id="temp-slider" orient="vertical" />
@@ -98,7 +98,7 @@
 
               <!-- BRIGHTNESS -->
               <div class="v-control-group bright-side">
-                <div class="v-label-top">BRIGHT</div>
+                <div class="v-label-top">{% if request.locale.iso_code == 'ar' %}السطوع{% else %}BRIGHT{% endif %}</div>
                 <div class="v-track">
                   <div class="v-fill" id="bright-fill" style="background: #fff;"></div>
                   <input type="range" min="0" max="100" value="80" class="v-slider" id="bright-slider" orient="vertical" />
@@ -208,11 +208,12 @@
           tempLabel.style.color = currentColorHex;
           tempThumb.style.backgroundColor = currentColorHex;
           
-          let labelText = "Warm White";
-          if (temp <= 3000) labelText = "Candlelight";
-          else if (temp > 3000 && temp <= 4500) labelText = "Warm White";
-          else if (temp > 4500 && temp <= 5800) labelText = "Daylight";
-          else labelText = "Cool White";
+          const isAr = "{{ request.locale.iso_code }}" === "ar";
+          let labelText = isAr ? "أبيض دافئ" : "Warm White";
+          if (temp <= 3000) labelText = isAr ? "ضوء شموع" : "Candlelight";
+          else if (temp > 3000 && temp <= 4500) labelText = isAr ? "أبيض دافئ" : "Warm White";
+          else if (temp > 4500 && temp <= 5800) labelText = isAr ? "ضوء النهار" : "Daylight";
+          else labelText = isAr ? "أبيض بارد" : "Cool White";
           
           tempLabel.innerText = `${temp}K — ${labelText}`;
           

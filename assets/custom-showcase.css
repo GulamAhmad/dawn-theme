@@ -319,3 +319,37 @@
   height: auto;
   overflow: visible;
 }
+
+/* ================================================
+   RTL SUPPORT
+   The .showcase-section MUST stay LTR so the 300vw flex strip
+   aligns to the left. GSAP's xPercent slides them leftward.
+   Without this, RTL right-aligns the 300vw strip and GSAP
+   scrolls into empty space.
+   The content INSIDE each panel stays RTL.
+   ================================================ */
+
+/* Force the section and scroll strip to LTR at ALL breakpoints */
+[dir="rtl"] .showcase-section,
+[dir="rtl"] .pin-container,
+[dir="rtl"] .pin-wrap {
+  direction: ltr;
+}
+
+/* Keep content inside panels RTL */
+[dir="rtl"] .showcase-panel {
+  direction: rtl;
+}
+
+[dir="rtl"] .showcase-content {
+  direction: rtl;
+}
+
+[dir="rtl"] .showcase-text-content {
+  direction: rtl;
+  text-align: right;
+}
+
+[dir="rtl"] .showcase-eyebrow {
+  flex-direction: row-reverse;
+}

@@ -15,67 +15,89 @@
       <div class="eng-text-content eng-animate">
 
         <div class="eng-eyebrow-left">
-          <span>PREMIUM ENGINEERING</span>
+          <span>{% if request.locale.iso_code == 'ar' %}هندسة استثنائية{% else %}PREMIUM ENGINEERING{% endif %}</span>
           <div class="eyebrow-line-cyan"></div>
         </div>
 
-        <h2 class="eng-main-headline">6 Damped Joints</h2>
+        <h2 class="eng-main-headline">{% if request.locale.iso_code == 'ar' %}٦ مفاصل مخمدة{% else %}6 Damped Joints{% endif %}</h2>
 
         <p class="eng-main-desc">
-          Aviation-grade aluminum alloy arms with strongly damped rotating joints.<br>
-          Position it exactly where you need it, and it stays.
+          {% if request.locale.iso_code == 'ar' %}
+            أذرع من سبائك الألومنيوم المستخدمة في الطيران مع مفاصل دوارة مخمدة بقوة.<br>
+            ضعه حيث تحتاجه تماماً، وسيبقى هناك.
+          {% else %}
+            Aviation-grade aluminum alloy arms with strongly damped rotating joints.<br>
+            Position it exactly where you need it, and it stays.
+          {% endif %}
         </p>
 
-        <div class="eng-features-list">
-
-          <!-- Feature 1: Smooth & Precise -->
-          <div class="eng-feature-item">
-            <div class="eng-feature-icon icon-cyan">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                   stroke="currentColor" stroke-width="1.5"
-                   stroke-linecap="round" stroke-linejoin="round">
-                <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/>
-                <circle cx="12" cy="12" r="3"/>
-              </svg>
-            </div>
-            <div class="eng-feature-text">
-              <h4>Smooth &amp; Precise</h4>
-              <p>Strongly damped rotation<br>for perfect positioning.</p>
-            </div>
-          </div>
-
-          <!-- Feature 2: Built to Last -->
-          <div class="eng-feature-item">
-            <div class="eng-feature-icon icon-magenta">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                   stroke="currentColor" stroke-width="1.5"
-                   stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                <path d="m9 12 2 2 4-4"/>
-              </svg>
-            </div>
-            <div class="eng-feature-text">
-              <h4>Built to Last</h4>
-              <p>Aviation-grade aluminum<br>for strength and durability.</p>
-            </div>
-          </div>
-
-          <!-- Feature 3: Stays in Place -->
-          <div class="eng-feature-item">
-            <div class="eng-feature-icon icon-amber">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                   stroke="currentColor" stroke-width="1.5"
-                   stroke-linecap="round" stroke-linejoin="round">
+        <div class="eng-cards-container">
+          <!-- Card 1: Precision Engineered -->
+          <div class="eng-module-card eng-animate">
+            <div class="eng-module-icon">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#ffb400" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                 <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
                 <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
               </svg>
             </div>
-            <div class="eng-feature-text">
-              <h4>Stays in Place</h4>
-              <p>Engineered damping keeps<br>your setup exactly where<br>you set it.</p>
+            <div class="eng-module-content">
+              <div class="eng-module-dot dot-amber"></div>
+              <div class="eng-module-eyebrow">{% if request.locale.iso_code == 'ar' %}وحدة // ٠١{% else %}MODULE // 01{% endif %}</div>
+              <h3>{% if request.locale.iso_code == 'ar' %}هندسة دقيقة{% else %}Precision Engineered{% endif %}</h3>
+              <p>{% if request.locale.iso_code == 'ar' %}أذرع من الألومنيوم المستخدم في الطيران مع دوران مخمد بقوة. يبقى إعدادك في مكانه المثالي، حيث تحتاجه تماماً.{% else %}Aviation-grade aluminum arms with strongly damped rotation. Your setup stays perfectly positioned, exactly where you need it.{% endif %}</p>
             </div>
           </div>
 
+          <!-- Card 2: Eye-Caring Design -->
+          <div class="eng-module-card eng-animate">
+            <div class="eng-module-icon">
+              <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 24C4 24 14 12 24 12C34 12 44 24 44 24C44 24 34 36 24 36C14 36 4 24 4 24Z"/>
+                <circle cx="24" cy="24" r="7" stroke="#00e6d2"/>
+                <circle cx="24" cy="24" r="2" fill="#00e6d2" stroke="none"/>
+                <line x1="24" y1="2" x2="24" y2="4" stroke="#ffffff"/>
+                <line x1="24" y1="7" x2="24" y2="9" stroke="#ffffff"/>
+                <line x1="24" y1="39" x2="24" y2="41" stroke="#ffffff"/>
+                <line x1="24" y1="44" x2="24" y2="46" stroke="#ffffff"/>
+                <line x1="14" y1="42" x2="20" y2="36" stroke="#00e6d2"/>
+                <line x1="34" y1="42" x2="28" y2="36" stroke="#00e6d2"/>
+              </svg>
+            </div>
+            <div class="eng-module-content">
+              <div class="eng-module-dot dot-cyan"></div>
+              <div class="eng-module-eyebrow">{% if request.locale.iso_code == 'ar' %}وحدة // ٠٢{% else %}MODULE // 02{% endif %}</div>
+              <h3>{% if request.locale.iso_code == 'ar' %}تصميم مريح للعين{% else %}Eye-Caring Design{% endif %}</h3>
+              <p>{% if request.locale.iso_code == 'ar' %}يضمن إخراج الضوء بزاوية ٤٥ درجة عدم وصول الضوء المباشر إلى عينيك. يزيل وهج الشاشة ويقلل من إجهاد العين.{% else %}45° angled light output ensures no direct light hits your eyes. Eliminates screen glare and reduces eye strain.{% endif %}</p>
+            </div>
+          </div>
+
+          <!-- Card 2: Smart Pre-sets -->
+          <div class="eng-module-card eng-animate">
+            <div class="eng-module-icon">
+              <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <!-- Top slider -->
+                <rect x="6" y="12" width="36" height="6" rx="3" />
+                <line x1="9" y1="15" x2="18" y2="15" stroke="#ff1478" stroke-width="2"/>
+                <circle cx="18" cy="15" r="4" fill="#ff1478" stroke="none"/>
+                
+                <!-- Middle slider -->
+                <rect x="6" y="24" width="36" height="6" rx="3" />
+                <line x1="9" y1="27" x2="32" y2="27" stroke="#ff1478" stroke-width="2"/>
+                <circle cx="32" cy="27" r="4" fill="#ff1478" stroke="none"/>
+
+                <!-- Bottom slider -->
+                <rect x="6" y="36" width="36" height="6" rx="3" />
+                <line x1="9" y1="39" x2="14" y2="39" stroke="#ff1478" stroke-width="2"/>
+                <circle cx="14" cy="39" r="4" fill="#ff1478" stroke="none"/>
+              </svg>
+            </div>
+            <div class="eng-module-content">
+              <div class="eng-module-dot dot-magenta"></div>
+              <div class="eng-module-eyebrow">{% if request.locale.iso_code == 'ar' %}وحدة // ٠٣{% else %}MODULE // 03{% endif %}</div>
+              <h3>{% if request.locale.iso_code == 'ar' %}إعدادات ذكية مسبقة{% else %}Smart Pre-sets{% endif %}</h3>
+              <p>{% if request.locale.iso_code == 'ar' %}احفظ مجموعات الألوان ومستويات السطوع المفضلة لديك في أزرار اللمس الفعلية أو عبر التطبيق المرافق.{% else %}Save your favorite color combinations and brightness levels to physical touch buttons or via the companion app.{% endif %}</p>
+            </div>
+          </div>
         </div>
       </div>
       <!-- ─── End Left Column ──────────────────────────── -->

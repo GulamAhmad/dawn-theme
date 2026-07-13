@@ -16,28 +16,46 @@
     <div class="hero-left">
       <div class="eyebrow-row">
         <div class="eyebrow-line"></div>
-        <span class="eyebrow-text"
-          >Dual-sided illumination · RGB Smart Desk Lamp</span
-        >
+        <span class="eyebrow-text">
+          {% if request.locale.iso_code == 'ar' %}
+            إضاءة مزدوجة الجوانب · مصباح مكتب ذكي بألوان RGB
+          {% else %}
+            Dual-sided illumination · RGB Smart Desk Lamp
+          {% endif %}
+        </span>
       </div>
 
       <h1 class="hero-headline">
-        <div class="headline-line1">ATMOSPHERE MEETS</div>
+        <div class="headline-line1">
+          {% if request.locale.iso_code == 'ar' %}
+            يلتقي الجو مع
+          {% else %}
+            ATMOSPHERE MEETS
+          {% endif %}
+        </div>
         <div class="headline-line2">
-          <span class="hl-univer">CONTR</span><span class="hl-s">O</span><span class="hl-e">L</span>
+          {% if request.locale.iso_code == 'ar' %}
+            <span class="hl-univer">التحكم</span>
+          {% else %}
+            <span class="hl-univer">CONTR</span><span class="hl-s">O</span><span class="hl-e">L</span>
+          {% endif %}
         </div>
       </h1>
 
       <p class="hero-subtext">
-        Immersive RGB.
-        <span class="bold-white">Warm productivity.</span> Two independent
-        light engines — one for the ambience, one for the work. The only
-        desk lamp you'll ever need.
+        {% if request.locale.iso_code == 'ar' %}
+          إضاءة RGB غامرة. <span class="bold-white">إنتاجية دافئة.</span> محركا إضاءة مستقلان — أحدهما للجو العام، والآخر للعمل. مصباح المكتب الوحيد الذي ستحتاجه.
+        {% else %}
+          Immersive RGB.
+          <span class="bold-white">Warm productivity.</span> Two independent
+          light engines — one for the ambience, one for the work. The only
+          desk lamp you'll ever need.
+        {% endif %}
       </p>
 
       <div class="cta-row">
-        <button class="primary-btn">
-          Pre-order now
+        <a href="{{ section.settings.primary_cta_link | default: routes.all_products_collection_url }}" class="primary-btn" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">
+          {% if request.locale.iso_code == 'ar' %}اطلب مسبقاً الآن{% else %}Pre-order now{% endif %}
           <svg
             width="16"
             height="16"
@@ -50,7 +68,7 @@
           >
             <path d="M5 12h14M12 5l7 7-7 7" />
           </svg>
-        </button>
+        </a>
         <button class="ghost-btn">
           <div class="play-circle">
             <svg
@@ -62,7 +80,7 @@
               <path d="M0 0L8 5L0 10V0Z" />
             </svg>
           </div>
-          Watch the film
+          {% if request.locale.iso_code == 'ar' %}شاهد الفيلم{% else %}Watch the film{% endif %}
         </button>
       </div>
     </div>
@@ -76,26 +94,30 @@
 
       <div class="glass-chip chip-1">
         <div class="chip-dot dot-cyan"></div>
-        RGB Mode Active
+        {% if request.locale.iso_code == 'ar' %}وضع RGB نشط{% else %}RGB Mode Active{% endif %}
       </div>
       <div class="glass-chip chip-2">
         <div class="chip-dot dot-amber"></div>
-        4000K Warm White
+        {% if request.locale.iso_code == 'ar' %}4000K أبيض دافئ{% else %}4000K Warm White{% endif %}
       </div>
       <div class="glass-chip chip-3">
         <div class="chip-dot dot-magenta"></div>
-        Bias Lighting On
+        {% if request.locale.iso_code == 'ar' %}إضاءة انحيازية قيد التشغيل{% else %}Bias Lighting On{% endif %}
       </div>
     </div>
 
     <!-- Bottom Elements -->
     <div class="scroll-cue">
       <div class="scroll-line"></div>
-      <span>Scroll to explore</span>
+      <span>{% if request.locale.iso_code == 'ar' %}مرر للاستكشاف{% else %}Scroll to explore{% endif %}</span>
     </div>
 
     <div class="version-badge">
-      Gen II — <span class="current-year">2025</span>
+      {% if request.locale.iso_code == 'ar' %}
+        الجيل الثاني — <span class="current-year">2025</span>
+      {% else %}
+        Gen II — <span class="current-year">2025</span>
+      {% endif %}
     </div>
   </section>
 </div>
@@ -104,6 +126,14 @@
 {% schema %}
 {
   "name": "Custom Hero",
+  "settings": [
+    {
+      "type": "url",
+      "id": "primary_cta_link",
+      "label": "Primary Button Link",
+      "info": "Where should the 'Pre-order now' button go?"
+    }
+  ],
   "presets": [
     {
       "name": "Custom Hero",

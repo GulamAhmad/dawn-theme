@@ -1,5 +1,4 @@
 {
-  "layout": "theme.custom",
   "sections": {
     "custom_hero": {
       "type": "custom-hero",

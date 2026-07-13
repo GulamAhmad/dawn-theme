@@ -55,7 +55,7 @@
     <div class="stats-left">
       <div class="stats-eyebrow">
         <div class="eyebrow-line"></div>
-        <span>RGB + WING FLEXIBILITY</span>
+        <span>{% if request.locale.iso_code == 'ar' %}مرونة الأجنحة + RGB{% else %}RGB + WING FLEXIBILITY{% endif %}</span>
       </div>
 
       <div class="wing-captions-container">
@@ -64,9 +64,9 @@
             <h2 class="wing-caption {% if forloop.first %}active{% endif %}">{{ block.settings.caption }}</h2>
           {% endfor %}
         {% else %}
-          <h2 class="wing-caption active">Shape the light your way.</h2>
-          <h2 class="wing-caption">One form. Multiple moods.</h2>
-          <h2 class="wing-caption">Adjust the wings. Transform the space.</h2>
+          <h2 class="wing-caption active">{% if request.locale.iso_code == 'ar' %}شكّل الإضاءة على طريقتك.{% else %}Shape the light your way.{% endif %}</h2>
+          <h2 class="wing-caption">{% if request.locale.iso_code == 'ar' %}شكل واحد. أمزجة متعددة.{% else %}One form. Multiple moods.{% endif %}</h2>
+          <h2 class="wing-caption">{% if request.locale.iso_code == 'ar' %}اضبط الأجنحة. حوّل المكان.{% else %}Adjust the wings. Transform the space.{% endif %}</h2>
         {% endif %}
       </div>
 
@@ -75,24 +75,24 @@
           <div class="stat-number-wrap">
             <span class="stat-value grad-cyan-magenta">0</span><span class="stat-suffix grad-cyan-magenta">M+</span>
           </div>
-          <div class="stat-label">VIBRANT COLORS</div>
-          <p class="stat-label" style="font-size: 12px; margin-top: 4px; text-transform: none; color: rgba(255, 255, 255, 0.5);">16 Million ways to set the tone</p>
+          <div class="stat-label">{% if request.locale.iso_code == 'ar' %}ألوان نابضة بالحياة{% else %}VIBRANT COLORS{% endif %}</div>
+          <p class="stat-label" style="font-size: 12px; margin-top: 4px; text-transform: none; color: rgba(255, 255, 255, 0.5);">{% if request.locale.iso_code == 'ar' %}١٦ مليون طريقة لضبط الجو{% else %}16 Million ways to set the tone{% endif %}</p>
         </div>
 
         <div class="stat-block" data-target="200">
           <div class="stat-number-wrap">
             <span class="stat-value solid-cyan">0</span><span class="stat-suffix solid-cyan">+</span>
           </div>
-          <div class="stat-label">DYNAMIC LIGHTING MODES</div>
-          <p class="stat-label" style="font-size: 12px; margin-top: 4px; text-transform: none; color: rgba(255, 255, 255, 0.5);">Dynamic light, endless atmosphere</p>
+          <div class="stat-label">{% if request.locale.iso_code == 'ar' %}أوضاع إضاءة ديناميكية{% else %}DYNAMIC LIGHTING MODES{% endif %}</div>
+          <p class="stat-label" style="font-size: 12px; margin-top: 4px; text-transform: none; color: rgba(255, 255, 255, 0.5);">{% if request.locale.iso_code == 'ar' %}إضاءة ديناميكية، جو لا ينتهي{% else %}Dynamic light, endless atmosphere{% endif %}</p>
         </div>
 
         <div class="stat-block" data-target="1000">
           <div class="stat-number-wrap">
             <span class="stat-value solid-amber">0</span><span class="stat-suffix solid-amber">lm</span>
           </div>
-          <div class="stat-label">PEAK LUMEN OUTPUT</div>
-          <p class="stat-label" style="font-size: 12px; margin-top: 4px; text-transform: none; color: rgba(255, 255, 255, 0.5);">From subtle glow to full immersion</p>
+          <div class="stat-label">{% if request.locale.iso_code == 'ar' %}أقصى ناتج لومن{% else %}PEAK LUMEN OUTPUT{% endif %}</div>
+          <p class="stat-label" style="font-size: 12px; margin-top: 4px; text-transform: none; color: rgba(255, 255, 255, 0.5);">{% if request.locale.iso_code == 'ar' %}من توهج خافت إلى انغماس كامل{% else %}From subtle glow to full immersion{% endif %}</p>
         </div>
       </div>
     </div>

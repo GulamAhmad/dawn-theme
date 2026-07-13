@@ -14,14 +14,14 @@
   <div class="rs-header">
     <div class="rs-eyebrow">
       <div class="rs-eyebrow-line"></div>
-      <span>COMMUNITY SHOWCASE</span>
+      <span>{% if request.locale.iso_code == 'ar' %}عرض المجتمع{% else %}COMMUNITY SHOWCASE{% endif %}</span>
       <div class="rs-eyebrow-line"></div>
     </div>
     <h2 class="rs-headline">
-      SEEN IN <span class="rs-hl">REAL SPACES</span>
+      {% if request.locale.iso_code == 'ar' %}رؤيتنا في <span class="rs-hl">مساحات حقيقية</span>{% else %}SEEN IN <span class="rs-hl">REAL SPACES</span>{% endif %}
     </h2>
     <p class="rs-subtext">
-      Discover how creators, gamers, and professionals illuminate their environments with LAMBATY.
+      {% if request.locale.iso_code == 'ar' %}اكتشف كيف يضيء المبدعون واللاعبون والمحترفون بيئاتهم باستخدام LAMBATY.{% else %}Discover how creators, gamers, and professionals illuminate their environments with LAMBATY.{% endif %}
     </p>
   </div>
 
@@ -48,7 +48,7 @@
       ></video>
       <div class="reel-overlay"></div>
       <div class="reel-info">
-        <div class="reel-badge">FEATURED SETUP</div>
+        <div class="reel-badge">{% if request.locale.iso_code == 'ar' %}إعداد مميز{% else %}FEATURED SETUP{% endif %}</div>
         <h3 class="reel-creator">{{ section.settings.reel_1_creator | default: 'ALEX W.' }}</h3>
         <div class="reel-env">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -59,8 +59,8 @@
           {{ section.settings.reel_1_env | default: 'Gaming Studio' }}
         </div>
         <div class="reel-tags">
-          <span class="rs-tag">RGB Mode</span>
-          <span class="rs-tag">Music Sync</span>
+          <span class="rs-tag">{% if request.locale.iso_code == 'ar' %}وضع RGB{% else %}RGB Mode{% endif %}</span>
+          <span class="rs-tag">{% if request.locale.iso_code == 'ar' %}مزامنة الموسيقى{% else %}Music Sync{% endif %}</span>
         </div>
       </div>
     </div>
@@ -86,7 +86,7 @@
       ></video>
       <div class="reel-overlay"></div>
       <div class="reel-info">
-        <div class="reel-badge">CREATOR SERIES</div>
+        <div class="reel-badge">{% if request.locale.iso_code == 'ar' %}سلسلة المبدعين{% else %}CREATOR SERIES{% endif %}</div>
         <h3 class="reel-creator">{{ section.settings.reel_2_creator | default: 'SARAH JENKINS' }}</h3>
         <div class="reel-env">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -97,8 +97,8 @@
           {{ section.settings.reel_2_env | default: 'Creator Workspace' }}
         </div>
         <div class="reel-tags">
-          <span class="rs-tag">Focus Lighting</span>
-          <span class="rs-tag">Smart Presets</span>
+          <span class="rs-tag">{% if request.locale.iso_code == 'ar' %}إضاءة التركيز{% else %}Focus Lighting{% endif %}</span>
+          <span class="rs-tag">{% if request.locale.iso_code == 'ar' %}إعدادات ذكية مسبقة{% else %}Smart Presets{% endif %}</span>
         </div>
       </div>
     </div>
@@ -123,7 +123,7 @@
       ></video>
       <div class="reel-overlay"></div>
       <div class="reel-info">
-        <div class="reel-badge">COMMUNITY PICK</div>
+        <div class="reel-badge">{% if request.locale.iso_code == 'ar' %}اختيار المجتمع{% else %}COMMUNITY PICK{% endif %}</div>
         <h3 class="reel-creator">{{ section.settings.reel_3_creator | default: 'DAVID K.' }}</h3>
         <div class="reel-env">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -133,8 +133,8 @@
           {{ section.settings.reel_3_env | default: 'Minimal Desk' }}
         </div>
         <div class="reel-tags">
-          <span class="rs-tag">Warm White</span>
-          <span class="rs-tag">Focus Lighting</span>
+          <span class="rs-tag">{% if request.locale.iso_code == 'ar' %}أبيض دافئ{% else %}Warm White{% endif %}</span>
+          <span class="rs-tag">{% if request.locale.iso_code == 'ar' %}إضاءة التركيز{% else %}Focus Lighting{% endif %}</span>
         </div>
       </div>
     </div>
@@ -158,7 +158,7 @@
       ></video>
       <div class="reel-overlay"></div>
       <div class="reel-info">
-        <div class="reel-badge">FEATURED SETUP</div>
+        <div class="reel-badge">{% if request.locale.iso_code == 'ar' %}إعداد مميز{% else %}FEATURED SETUP{% endif %}</div>
         <h3 class="reel-creator">{{ section.settings.reel_4_creator | default: 'STUDIO 04' }}</h3>
         <div class="reel-env">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -167,7 +167,7 @@
           {{ section.settings.reel_4_env | default: 'Night Setup' }}
         </div>
         <div class="reel-tags">
-          <span class="rs-tag">RGB Mode</span>
+          <span class="rs-tag">{% if request.locale.iso_code == 'ar' %}وضع RGB{% else %}RGB Mode{% endif %}</span>
         </div>
       </div>
     </div>
@@ -193,7 +193,7 @@
       ></video>
       <div class="reel-overlay"></div>
       <div class="reel-info">
-        <div class="reel-badge">CREATOR SERIES</div>
+        <div class="reel-badge">{% if request.locale.iso_code == 'ar' %}سلسلة المبدعين{% else %}CREATOR SERIES{% endif %}</div>
         <h3 class="reel-creator">{{ section.settings.reel_5_creator | default: 'MARCUS T.' }}</h3>
         <div class="reel-env">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -204,8 +204,8 @@
           {{ section.settings.reel_5_env | default: 'Productivity Corner' }}
         </div>
         <div class="reel-tags">
-          <span class="rs-tag">Focus Lighting</span>
-          <span class="rs-tag">Smart Presets</span>
+          <span class="rs-tag">{% if request.locale.iso_code == 'ar' %}إضاءة التركيز{% else %}Focus Lighting{% endif %}</span>
+          <span class="rs-tag">{% if request.locale.iso_code == 'ar' %}إعدادات ذكية مسبقة{% else %}Smart Presets{% endif %}</span>
         </div>
       </div>
     </div>

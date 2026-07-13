@@ -28,7 +28,7 @@
           <div class="mic-bar"></div>
           <div class="mic-bar"></div>
         </div>
-        MIC SYNC ACTIVE
+        {% if request.locale.iso_code == 'ar' %}مزامنة الميكروفون نشطة{% else %}MIC SYNC ACTIVE{% endif %}
       </div>
     </div>
 
@@ -36,22 +36,22 @@
     <div class="copy-col">
       <div class="eyebrow-row">
         <div class="beat-eyebrow-line"></div>
-        <span class="beat-eyebrow-text">MUSIC SYNC TECHNOLOGY</span>
+        <span class="beat-eyebrow-text">{% if request.locale.iso_code == 'ar' %}تكنولوجيا مزامنة الموسيقى{% else %}MUSIC SYNC TECHNOLOGY{% endif %}</span>
       </div>
 
       <h2 class="beat-headline">
-        FEEL THE <span class="beat-hl-magenta">BEAT</span>
+        {% if request.locale.iso_code == 'ar' %}اشعر <span class="beat-hl-magenta">بالإيقاع</span>{% else %}FEEL THE <span class="beat-hl-magenta">BEAT</span>{% endif %}
       </h2>
 
       <p class="beat-subtext">
-        Built-in high-sensitivity microphones sync the ambient lighting to
-        your music in real-time.
+        {% if request.locale.iso_code == 'ar' %}ميكروفونات مدمجة عالية الحساسية تزامن الإضاءة المحيطة مع موسيقاك في الوقت الفعلي.{% else %}Built-in high-sensitivity microphones sync the ambient lighting to
+        your music in real-time.{% endif %}
       </p>
 
       <div class="feature-pills">
-        <div class="pill">Real-time Sync</div>
-        <div class="pill">Audio Reactive</div>
-        <div class="pill">Auto Calibrate</div>
+        <div class="pill">{% if request.locale.iso_code == 'ar' %}مزامنة في الوقت الفعلي{% else %}Real-time Sync{% endif %}</div>
+        <div class="pill">{% if request.locale.iso_code == 'ar' %}تفاعل صوتي{% else %}Audio Reactive{% endif %}</div>
+        <div class="pill">{% if request.locale.iso_code == 'ar' %}معايرة تلقائية{% else %}Auto Calibrate{% endif %}</div>
       </div>
 
       <div class="soundwave">
@@ -60,8 +60,8 @@
       <div class="wave-baseline"></div>
 
       <div class="wave-labels">
-        <span class="label-freq">FREQ</span>
-        <span class="label-sync"><div class="sync-dot"></div> SYNC ACTIVE</span>
+        <span class="label-freq">{% if request.locale.iso_code == 'ar' %}التردد{% else %}FREQ{% endif %}</span>
+        <span class="label-sync"><div class="sync-dot"></div> {% if request.locale.iso_code == 'ar' %}المزامنة نشطة{% else %}SYNC ACTIVE{% endif %}</span>
       </div>
     </div>
   </div>
