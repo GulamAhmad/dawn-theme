@@ -217,13 +217,11 @@
     gap: 8px;
   }
   .lang-switcher {
-    display: none;
+    font-size: 10px;
+    margin-right: 4px;
   }
   .live-badge {
-    padding: 4px 8px;
-  }
-  .live-badge span {
-    font-size: 9px;
+    display: none;
   }
   .nav-cta {
     padding: 6px 12px;

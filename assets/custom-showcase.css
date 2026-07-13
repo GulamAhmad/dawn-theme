@@ -201,48 +201,18 @@
 }
 
 /* ================================================
-   TABLET (≤1024 px) — stack panels vertically,
-   keep native CSS scroll (GSAP disabled on mobile)
+   TABLET & MOBILE (≤1024 px)
+   Keep GSAP pinned horizontal scroll, but adjust padding
    ================================================ */
 @media (max-width: 1024px) {
-  /* Switch off the fixed-height viewport lock */
-  .pin-container {
-    height: auto;
-    overflow: visible;
-  }
-
-  .showcase-section {
-    padding-bottom: 40px;
-  }
-
-  /* Horizontal native scroll strip */
-  .pin-wrap {
-    width: auto;
-    height: auto;
-    display: flex;
-    flex-direction: row;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    gap: 0;
-  }
-  .pin-wrap::-webkit-scrollbar { display: none; }
-
-  /* Each panel becomes a scroll-snap card */
   .showcase-panel {
-    width: 100vw;
-    min-width: 100vw;
-    height: auto;
-    min-height: 80vh;
-    scroll-snap-align: start;
-    padding: 80px 0;
+    padding: 0;
   }
 
   .showcase-content,
   .showcase-content.reverse {
     grid-template-columns: 1fr;
-    gap: 40px;
+    gap: 24px;
     padding: 0 24px;
   }
 
@@ -254,20 +224,19 @@
     height: auto;
   }
 
-  /* ─── KEY FIX: Center smaller vertically stacked images on mobile ── */
+  /* Stack images vertically on mobile to fill empty space */
   .dual-image {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 24px;
+    gap: 16px;
     width: 100%;
     height: auto;
   }
 
   .dual-image .main-img,
   .dual-image .sub-img {
-    width: 70%;
-    max-width: 320px;
+    width: 245px; /* Fixed width to keep identical size across all mobile screens */
     height: auto;
   }
 
@@ -293,7 +262,8 @@
   }
 
   .showcase-headline {
-    font-size: clamp(38px, 10vw, 56px);
+    font-size: 44px; /* Fixed size */
+    max-width: 320px; /* Force consistent text wrapping across mobile sizes */
   }
 
   .dual-image {

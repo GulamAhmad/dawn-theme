@@ -148,13 +148,7 @@
 
       if (!showcasePanels.length || !pinWrap) return;
 
-      const isMobile = window.innerWidth <= 768;
       const isRTL = document.documentElement.getAttribute('dir') === 'rtl';
-
-      if (isMobile) {
-        if (pinContainer) pinContainer.classList.add('mobile-scroll');
-        return;
-      }
 
       // Force the scroll strip to LTR so GSAP's xPercent math stays consistent.
       // The text content inside panels still inherits RTL from its own styling.
