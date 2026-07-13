@@ -6,7 +6,7 @@
   position: relative;
   background: #060810;
   color: rgba(255, 255, 255, 0.6);
-  padding: 120px 48px 48px;
+  padding: 80px 48px 48px;
   overflow: hidden;
   font-family: 'Space Grotesk', sans-serif;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
@@ -18,6 +18,21 @@
   inset: 0;
   pointer-events: none;
   z-index: 0;
+}
+
+.footer-watermark {
+  position: absolute;
+  bottom: -10vw;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(120px, 22vw, 400px);
+  line-height: 1;
+  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.02);
+  white-space: nowrap;
+  user-select: none;
+  z-index: 1;
 }
 
 .footer-orb {
@@ -89,7 +104,7 @@
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr;
   gap: 64px;
-  margin-bottom: 80px;
+  margin-bottom: 48px;
 }
 
 .footer-col {
@@ -99,6 +114,7 @@
 
 .brand-col {
   padding-right: 40px;
+  align-items: flex-start;
 }
 
 /* ─── Brand / Logo ─────────────────────────────────────── */
@@ -126,13 +142,15 @@
 
 .footer-logo-link {
   display: inline-block;
-  margin-top: -18px;
-  margin-bottom: 16px;
+  margin-top: 0;
+  margin-bottom: 24px;
 }
 
 .footer-logo-img {
-  width: 320px;
-  height: auto;
+  width: 400px;
+  height: 50px;
+  object-fit: cover;
+  object-position: center;
   display: block;
 }
 
@@ -140,7 +158,7 @@
   font-size: 16px;
   font-weight: 300;
   color: rgba(255, 255, 255, 0.5);
-  margin: 0 0 48px;
+  margin: 0 0 32px;
   letter-spacing: 0.05em;
 }
 
@@ -311,7 +329,8 @@
   }
 
   .footer-logo-img {
-    width: 240px;
+    width: 200px;
+    height: 50px;
   }
 
   .footer-tech-labels {
@@ -375,18 +394,18 @@
   }
 
   .footer-grid {
-    grid-template-columns: 1fr;
-    gap: 32px;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px 16px;
   }
 
-  .brand-col {
-    grid-column: span 1;
+  .footer-social-links {
+    flex-direction: row;
+    gap: 2;
+    margin-top: 3rem;
   }
-
-  .footer-col:last-child {
-    grid-column: span 1;
+  .footer-col .st{
+    display: none;
   }
-
   .bottom-left {
     flex-direction: column;
     gap: 8px;

@@ -14,11 +14,14 @@
       <a href="#socials">Socials</a>
     </div>
     <div class="nav-right">
-      <div class="lang-switcher">
-        <a href="#" class="active">EN</a>
-        <span class="divider">/</span>
-        <a href="#" class="inactive">AR</a>
-      </div>
+      {%- form 'localization', id: 'HeaderLanguageForm', class: 'localization-form' -%}
+        <input type="hidden" name="locale_code" value="{{ request.locale.iso_code }}">
+        <div class="lang-switcher">
+          <button type="submit" name="locale_code" value="en" class="lang-btn {% if request.locale.iso_code != 'ar' %}active{% endif %}">EN</button>
+          <span class="divider">/</span>
+          <button type="submit" name="locale_code" value="ar" class="lang-btn {% if request.locale.iso_code == 'ar' %}active{% endif %}">AR</button>
+        </div>
+      {%- endform -%}
       <div class="live-badge">
         <div class="live-dot"></div>
         <span>Pre-order open</span>

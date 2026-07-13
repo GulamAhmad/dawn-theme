@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="{{ request.locale.iso_code }}" dir="{% if request.locale.iso_code == 'ar' %}rtl{% else %}ltr{% endif %}">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -9,6 +9,17 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    {% if request.locale.iso_code == 'ar' %}
+      <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+      <style>
+        body, p, a, h1, h2, h3, h4, h5, h6, .nav-links a, .nav-cta, .col-title, .footer-tagline, .tech-label {
+          font-family: 'Cairo', sans-serif !important;
+          letter-spacing: 0 !important;
+        }
+        .lang-switcher { margin-left: 8px; margin-right: 0; }
+        .brand-col { padding-left: 40px; padding-right: 0; }
+      </style>
+    {% endif %}
     
     <!-- Link your custom global CSS here -->
     {{ 'custom-global.css' | asset_url | stylesheet_tag }}

@@ -103,17 +103,27 @@
   margin-right: 8px;
 }
 
-.lang-switcher a {
-  text-decoration: none;
+.localization-form {
+  margin: 0;
+}
+
+.lang-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  letter-spacing: inherit;
   color: inherit;
   transition: color 0.25s ease;
 }
 
-.lang-switcher a:hover {
+.lang-btn:hover {
   color: #fff;
 }
 
-.lang-switcher a.active {
+.lang-btn.active {
   color: #fff;
   font-weight: 600;
 }
