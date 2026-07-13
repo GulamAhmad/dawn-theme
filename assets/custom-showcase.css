@@ -173,23 +173,21 @@
   border: 1px solid rgba(255, 255, 255, 0.05);
   transition: transform 0.4s ease;
   flex-shrink: 0;
+  width: calc(50% - 12px);
+  aspect-ratio: 1 / 1;
 }
 
 .dual-image .img-wrapper:hover {
   transform: translateY(-8px);
 }
 
-/* Main image is wider */
+/* Main image */
 .dual-image .main-img {
-  width: 55%;
-  height: auto;
   align-self: center;
 }
 
-/* Supplementary smaller image */
+/* Supplementary smaller image (now same size) */
 .dual-image .sub-img {
-  width: 40%;
-  height: auto;
   align-self: center;
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 40px 80px rgba(0, 0, 0, 0.7);
@@ -197,9 +195,9 @@
 
 .dual-image .img-wrapper img {
   width: 100%;
-  height: auto;
+  height: 100%;
   display: block;
-  object-fit: contain;
+  object-fit: cover;
 }
 
 /* ================================================
@@ -211,6 +209,10 @@
   .pin-container {
     height: auto;
     overflow: visible;
+  }
+
+  .showcase-section {
+    padding-bottom: 40px;
   }
 
   /* Horizontal native scroll strip */
@@ -252,18 +254,20 @@
     height: auto;
   }
 
-  /* ─── KEY FIX: Stack the two images vertically on tablet/mobile ── */
+  /* ─── KEY FIX: Center smaller vertically stacked images on mobile ── */
   .dual-image {
     flex-direction: column;
-    align-items: stretch;
-    gap: 16px;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
     width: 100%;
     height: auto;
   }
 
   .dual-image .main-img,
   .dual-image .sub-img {
-    width: 100%;
+    width: 70%;
+    max-width: 320px;
     height: auto;
   }
 
@@ -293,7 +297,7 @@
   }
 
   .dual-image {
-    gap: 12px;
+    gap: 20px;
   }
 
   .dual-image .img-wrapper {
