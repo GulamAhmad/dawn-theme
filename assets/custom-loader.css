@@ -3,8 +3,8 @@
 #lambaty-loader {
   position: fixed;
   inset: 0;
-  background: #060810;
-  z-index: 9999;
+  background: #060810 !important;
+  z-index: 99999 !important;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -23,6 +23,7 @@
 
 .loader-orb {
   position: absolute;
+  display: block !important;
   border-radius: 50%;
   opacity: 0.4;
   animation: loaderPulseOrb 4s alternate infinite ease-in-out;
@@ -37,8 +38,8 @@
 .loader-orb.orb-c {
   width: 400px;
   height: 400px;
-  background: rgba(0, 230, 210, 0.15);
-  filter: blur(80px);
+  background: rgba(0, 230, 210, 0.15) !important;
+  filter: blur(80px) !important;
   top: 10%;
   left: 20%;
   animation-delay: 0s;
@@ -47,8 +48,8 @@
 .loader-orb.orb-m {
   width: 350px;
   height: 350px;
-  background: rgba(255, 20, 120, 0.12);
-  filter: blur(80px);
+  background: rgba(255, 20, 120, 0.12) !important;
+  filter: blur(80px) !important;
   bottom: 20%;
   right: 20%;
   animation-delay: 1s;
@@ -57,8 +58,8 @@
 .loader-orb.orb-a {
   width: 300px;
   height: 300px;
-  background: rgba(255, 180, 0, 0.15);
-  filter: blur(80px);
+  background: rgba(255, 180, 0, 0.15) !important;
+  filter: blur(80px) !important;
   bottom: 10%;
   left: 30%;
   animation-delay: 2s;
@@ -66,19 +67,20 @@
 
 .loader-grid-lines {
   position: absolute;
+  display: block !important;
   inset: 0;
   background-image:
     linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-  background-size: 60px 60px;
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px) !important;
+  background-size: 60px 60px !important;
   z-index: 1;
 }
 
 /* ─── Centerpiece (logo + ring) ────────────────────────── */
 .loader-centerpiece {
   position: relative;
-  width: 200px;
-  height: 200px;
+  width: 200px !important;
+  height: 200px !important;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -88,6 +90,7 @@
 
 .loader-energy-ring {
   position: absolute;
+  display: block !important;
   inset: -4px;
   border-radius: 50%;
   background: conic-gradient(
@@ -97,7 +100,7 @@
     #ff1478 50%,
     #ffb400 75%,
     transparent 100%
-  );
+  ) !important;
   animation: rotateLoaderRing 4s linear infinite;
   z-index: -1;
   filter: blur(8px);
@@ -117,7 +120,7 @@
     #ff1478 50%,
     #ffb400 75%,
     transparent 100%
-  );
+  ) !important;
   filter: blur(2px);
 }
 
@@ -129,10 +132,10 @@
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background: rgba(6, 8, 16, 0.6);
+  background: rgba(6, 8, 16, 0.6) !important;
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -161,26 +164,27 @@
   font-weight: 500;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255, 0.4) !important;
   margin-bottom: 24px;
 }
 
 .loader-progress-container {
-  width: 100%;
-  height: 1px;
-  background: rgba(255, 255, 255, 0.1);
-  position: relative;
-  margin-bottom: 24px;
+  width: 100% !important;
+  height: 1px !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  position: relative !important;
+  margin-bottom: 24px !important;
 }
 
 .loader-progress-bar {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
+  position: absolute !important;
+  display: block !important;
+  top: 0 !important;
+  left: 0 !important;
+  height: 100% !important;
   width: 0%;
-  background: #ffffff;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px #00e6d2;
+  background: #ffffff !important;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px #00e6d2 !important;
   transition: width 0.1s ease-out;
 }
 
@@ -188,9 +192,9 @@
   font-family: 'Bebas Neue', sans-serif;
   font-size: 32px;
   letter-spacing: 0.1em;
-  color: #ffffff;
+  color: #ffffff !important;
   margin-bottom: 12px;
-  text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.3) !important;
 }
 
 .loader-boot-text {
@@ -198,7 +202,7 @@
   font-size: 11px;
   font-weight: 400;
   letter-spacing: 0.15em;
-  color: #00e6d2;
+  color: #00e6d2 !important;
   height: 16px;
   opacity: 1;
   transition: opacity 0.3s ease;

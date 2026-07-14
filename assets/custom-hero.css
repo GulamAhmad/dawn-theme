@@ -190,6 +190,7 @@
   padding: 14px 32px;
   border: none;
   cursor: pointer;
+  box-sizing: border-box;
   transition: background 0.2s ease, transform 0.2s ease;
 }
 
@@ -651,6 +652,10 @@
     flex-direction: column;
     gap: 16px;
     width: 100%;
+  }
+  
+  [dir="rtl"] .cta-row {
+    flex-direction: column;
   }
   
   .primary-btn {

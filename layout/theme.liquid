@@ -25,6 +25,13 @@
     {{ 'custom-global.css' | asset_url | stylesheet_tag }}
     {{ 'custom-loader.css' | asset_url | stylesheet_tag }}
     
+    {% unless template.name == 'index' %}
+      <!-- Restore Dawn's CSS variables and base styles for standard Shopify pages -->
+      {% render 'dawn-styles' %}
+      {{ 'base.css' | asset_url | stylesheet_tag }}
+    {% endunless %}
+
+    
     <!-- GSAP & Lenis for Smooth Scrolling and Animations -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
@@ -77,6 +84,12 @@
     
     <!-- Your Custom Footer -->
     <!-- Your Custom Footer (Removed default footer group) -->
+
+    {% unless template.name == 'index' %}
+      <!-- Restore Dawn's scripts for standard page functionality (variants, cart, etc.) -->
+      {% render 'dawn-scripts' %}
+    {% endunless %}
+
 
     <!-- ═══════════════ LAMBATY LOADER JS ═══════════════ -->
     <script>

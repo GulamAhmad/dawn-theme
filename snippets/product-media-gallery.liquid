@@ -20,7 +20,33 @@
     assign single_media_visible = true
   endif
 
-  assign media_count = product.media.size
+  assign all_variant_options_string = ''
+  for option in product.options_with_values
+    for value in option.values
+      assign all_variant_options_string = all_variant_options_string | append: value | append: '|||'
+    endfor
+  endfor
+  assign all_variant_options = all_variant_options_string | split: '|||'
+
+  assign visible_media_ids_string = ''
+  assign current_variant = product.selected_or_first_available_variant
+  for media in product.media
+    assign is_visible = true
+    if media.alt != blank and media.alt != product.title
+      if all_variant_options contains media.alt
+        unless current_variant.options contains media.alt
+          assign is_visible = false
+        endunless
+      endif
+    endif
+    if is_visible
+      assign media_id_str = media.id | append: ''
+      assign visible_media_ids_string = visible_media_ids_string | append: media_id_str | append: ','
+    endif
+  endfor
+  assign visible_media_ids = visible_media_ids_string | split: ','
+
+  assign media_count = visible_media_ids.size
   if section.settings.hide_variants and media_count > 1 and variant_images.size > 0
     assign media_count = media_count | minus: variant_images.size | plus: 1
   endif
@@ -86,6 +112,10 @@
         </li>
       {%- endif -%}
       {%- for media in product.media -%}
+        {%- assign media_id_str = media.id | append: '' -%}
+        {%- unless visible_media_ids contains media_id_str -%}
+          {%- continue -%}
+        {%- endunless -%}
         {% if media_position >= limit
           or media_position >= 1
           and section.settings.hide_variants
@@ -252,6 +282,10 @@
           </li>
         {%- endif -%}
         {%- for media in product.media -%}
+          {%- assign media_id_str = media.id | append: '' -%}
+          {%- unless visible_media_ids contains media_id_str -%}
+            {%- continue -%}
+          {%- endunless -%}
           {%- unless media.id == product.selected_or_first_available_variant.featured_media.id -%}
             {%- liquid
               capture media_index

@@ -451,3 +451,41 @@
     transform: scale(1.6);
   }
 }
+
+/* --- RTL Adjustments --- */
+html[dir="rtl"] .wing-captions-container {
+  min-height: 280px;
+}
+
+html[dir="rtl"] .wing-caption {
+  left: auto;
+  right: 0;
+  transform: translateX(-50px);
+}
+
+html[dir="rtl"] .wing-caption.active {
+  transform: translateX(0);
+}
+
+html[dir="rtl"] .wing-caption.slide-left {
+  transform: translateX(50px);
+}
+
+@media (max-width: 1024px) {
+  html[dir="rtl"] .wing-captions-container {
+    min-height: 220px;
+  }
+}
+
+@media (max-width: 768px) {
+  html[dir="rtl"] .wing-captions-container {
+    min-height: 240px;
+  }
+}
+
+@media (max-width: 480px) {
+  html[dir="rtl"] .wing-captions-container {
+    min-height: 250px;
+  }
+}
+

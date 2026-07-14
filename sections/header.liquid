@@ -6,12 +6,10 @@
       <img src="{{ 'White Logo Tag copy.png' | asset_url }}" alt="LAMBATY" class="header-logo-img" />
     </a>
     <div class="nav-links">
-      <a href="#stats-section">RGB</a>
-      <a href="#music">{% if request.locale.iso_code == 'ar' %}الموسيقى{% else %}Music{% endif %}</a>
-      <a href="#productivity">{% if request.locale.iso_code == 'ar' %}الإنتاجية{% else %}Productivity{% endif %}</a>
-      <a href="#usecases">{% if request.locale.iso_code == 'ar' %}الإعدادات{% else %}Setups{% endif %}</a>
-      <a href="#engineering">{% if request.locale.iso_code == 'ar' %}التصميم{% else %}Design{% endif %}</a>
-      <a href="#socials">{% if request.locale.iso_code == 'ar' %}التواصل{% else %}Socials{% endif %}</a>
+      <a href="{{ routes.root_url }}">{% if request.locale.iso_code == 'ar' %}الرئيسية{% else %}Home{% endif %}</a>
+      <a href="{{ routes.all_products_collection_url }}">{% if request.locale.iso_code == 'ar' %}المنتجات{% else %}Products{% endif %}</a>
+      <a href="/pages/contact">{% if request.locale.iso_code == 'ar' %}اتصل بنا{% else %}Contact Us{% endif %}</a>
+      <a href="{{ routes.cart_url }}">{% if request.locale.iso_code == 'ar' %}السلة{% else %}Cart{% endif %}</a>
     </div>
     <div class="nav-right">
       {%- form 'localization', id: 'HeaderLanguageForm', class: 'localization-form' -%}

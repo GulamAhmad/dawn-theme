@@ -1,12 +1,5 @@
 {
   "sections": {
-    "main": {
-      "type": "main-page",
-      "settings": {
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
     "form": {
       "type": "contact-form",
       "settings": {
@@ -16,10 +9,14 @@
         "padding_top": 36,
         "padding_bottom": 36
       }
+    },
+    "custom_footer": {
+      "type": "custom-footer",
+      "settings": {}
     }
   },
   "order": [
-    "main",
-    "form"
+    "form",
+    "custom_footer"
   ]
 }
