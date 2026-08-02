@@ -25,25 +25,16 @@
         <p class="footer-tagline">{% if request.locale.iso_code == 'ar' %}أضئ عالمك.{% else %}Illuminate Your Universe.{% endif %}</p>
       </div>
 
-      <!-- Explore Column -->
-      <div class="footer-col">
-        <h4 class="col-title">{% if request.locale.iso_code == 'ar' %}استكشف{% else %}Explore{% endif %}</h4>
-        <ul class="footer-links">
-          <li><a href="#stats-section">{% if request.locale.iso_code == 'ar' %}تجربة RGB{% else %}RGB Experience{% endif %}</a></li>
-          <li><a href="#productivity">{% if request.locale.iso_code == 'ar' %}الإنتاجية{% else %}Productivity{% endif %}</a></li>
-          <li><a href="#engineering">{% if request.locale.iso_code == 'ar' %}الهندسة{% else %}Engineering{% endif %}</a></li>
-          <li><a href="#socials">{% if request.locale.iso_code == 'ar' %}المجتمع{% else %}Community{% endif %}</a></li>
-        </ul>
-      </div>
-
       <!-- Support Column -->
       <div class="footer-col">
         <h4 class="col-title">{% if request.locale.iso_code == 'ar' %}الدعم{% else %}Support{% endif %}</h4>
         <ul class="footer-links">
-          <li><a href="{{ section.settings.faq_url | default: '#' }}">{% if request.locale.iso_code == 'ar' %}الأسئلة الشائعة{% else %}FAQs{% endif %}</a></li>
-          <li><a href="{{ section.settings.warranty_url | default: '#' }}">{% if request.locale.iso_code == 'ar' %}الضمان{% else %}Warranty{% endif %}</a></li>
-          <li><a href="{{ section.settings.contact_url | default: '#' }}">{% if request.locale.iso_code == 'ar' %}اتصل بنا{% else %}Contact{% endif %}</a></li>
-          <li><a href="{{ section.settings.shipping_url | default: '#' }}">{% if request.locale.iso_code == 'ar' %}الشحن{% else %}Shipping{% endif %}</a></li>
+          <li><a href="{{ section.settings.faq_url | default: '/pages/faq' }}">{% if request.locale.iso_code == 'ar' %}الأسئلة الشائعة{% else %}FAQs{% endif %}</a></li>
+          <li><a href="{{ section.settings.contact_url | default: '/pages/contact' }}">{% if request.locale.iso_code == 'ar' %}اتصل بنا{% else %}Contact{% endif %}</a></li>
+          <li><a href="{{ section.settings.shipping_url | default: '/pages/shipping-policy' }}">{% if request.locale.iso_code == 'ar' %}الشحن{% else %}Shipping Policy{% endif %}</a></li>
+          <li><a href="{{ section.settings.returns_url | default: '/pages/returns-refund-policy' }}">{% if request.locale.iso_code == 'ar' %}سياسة الإرجاع والاسترداد{% else %}Returns / Refund Policy{% endif %}</a></li>
+          <li><a href="/pages/privacy-policy">{% if request.locale.iso_code == 'ar' %}سياسة الخصوصية{% else %}Privacy Policy{% endif %}</a></li>
+          <li><a href="/pages/terms-of-service">{% if request.locale.iso_code == 'ar' %}شروط الخدمة{% else %}Terms of Service{% endif %}</a></li>
         </ul>
       </div>
 
@@ -53,8 +44,7 @@
         <div class="footer-social-links">
 
           <!-- Instagram -->
-          {%- if section.settings.instagram_url != blank -%}
-          <a href="{{ section.settings.instagram_url }}" class="footer-social-link" aria-label="Instagram" target="_blank" rel="noopener">
+          <a href="{{ section.settings.instagram_url | default: 'https://www.instagram.com/lambaty.sa/' }}" class="footer-social-link" aria-label="Instagram" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
               <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
               <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
@@ -62,52 +52,14 @@
             </svg>
             <span>Instagram</span>
           </a>
-          {%- else -%}
-          <a href="#" class="footer-social-link" aria-label="Instagram">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-            </svg>
-            <span>Instagram</span>
-          </a>
-          {%- endif -%}
 
           <!-- TikTok -->
-          {%- if section.settings.tiktok_url != blank -%}
-          <a href="{{ section.settings.tiktok_url }}" class="footer-social-link" aria-label="TikTok" target="_blank" rel="noopener">
+          <a href="{{ section.settings.tiktok_url | default: 'https://www.tiktok.com/@lambaty.sa' }}" class="footer-social-link" aria-label="TikTok" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
               <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path>
             </svg>
             <span>TikTok</span>
           </a>
-          {%- else -%}
-          <a href="#" class="footer-social-link" aria-label="TikTok">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path>
-            </svg>
-            <span>TikTok</span>
-          </a>
-          {%- endif -%}
-
-          <!-- YouTube -->
-          {%- if section.settings.youtube_url != blank -%}
-          <a href="{{ section.settings.youtube_url }}" class="footer-social-link" aria-label="YouTube" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33 2.78 2.78 0 0 0 1.94 2c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z"></path>
-              <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
-            </svg>
-            <span>YouTube</span>
-          </a>
-          {%- else -%}
-          <a href="#" class="footer-social-link" aria-label="YouTube">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33 2.78 2.78 0 0 0 1.94 2c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z"></path>
-              <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
-            </svg>
-            <span>YouTube</span>
-          </a>
-          {%- endif -%}
 
         </div>
       </div>
@@ -123,16 +75,6 @@
         <span>{% if request.locale.iso_code == 'ar' %}صُمم للمبدعين، واللاعبين، ومساحات العمل الحديثة.{% else %}Built for creators, gamers, and modern workspaces.{% endif %}</span>
       </div>
       <div class="bottom-right">
-        {%- for policy in shop.policies -%}
-          {%- if policy != blank -%}
-            <a href="{{ policy.url }}">{{ policy.title | escape }}</a>
-          {%- endif -%}
-        {%- endfor -%}
-        {%- if shop.policies.size == 0 -%}
-          <a href="#">{% if request.locale.iso_code == 'ar' %}الخصوصية{% else %}Privacy{% endif %}</a>
-          <a href="#">{% if request.locale.iso_code == 'ar' %}الشروط{% else %}Terms{% endif %}</a>
-          <a href="#">{% if request.locale.iso_code == 'ar' %}الدعم{% else %}Support{% endif %}</a>
-        {%- endif -%}
       </div>
     </div>
 
@@ -158,11 +100,6 @@
       "label": "TikTok URL"
     },
     {
-      "type": "url",
-      "id": "youtube_url",
-      "label": "YouTube URL"
-    },
-    {
       "type": "header",
       "content": "Support Links"
     },
@@ -173,8 +110,8 @@
     },
     {
       "type": "url",
-      "id": "warranty_url",
-      "label": "Warranty URL"
+      "id": "returns_url",
+      "label": "Returns URL"
     },
     {
       "type": "url",

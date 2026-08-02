@@ -1,0 +1,14 @@
+{
+  "sections": {
+    "main": {
+      "type": "policy-privacy"
+    },
+    "custom_footer": {
+      "type": "custom-footer"
+    }
+  },
+  "order": [
+    "main",
+    "custom_footer"
+  ]
+}

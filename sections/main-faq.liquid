@@ -1,0 +1,298 @@
+{{ 'component-accordion.css' | asset_url | stylesheet_tag }}
+{{ 'collapsible-content.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .faq-category-heading {
+    margin-top: 4rem;
+    margin-bottom: 2rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: 1.5rem;
+    border-bottom: 2px solid rgba(var(--color-foreground), 0.1);
+    padding-bottom: 1rem;
+    color: rgba(var(--color-foreground), 0.9);
+  }
+  
+  .faq-category-heading:first-child {
+    margin-top: 0;
+  }
+
+  /* Custom Premium Accordion Styling */
+  .custom-faq-accordion {
+    margin-top: 1.5rem !important;
+    margin-bottom: 0;
+    border-top: none !important;
+    border-bottom: none !important;
+    background: rgba(var(--color-foreground), 0.03);
+    border: 1px solid rgba(var(--color-foreground), 0.08);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .custom-faq-accordion:hover {
+    background: rgba(var(--color-foreground), 0.05);
+    border-color: rgba(var(--color-foreground), 0.15);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+  }
+
+  .custom-faq-accordion details[open] {
+    background: rgba(var(--color-foreground), 0.05);
+    border-color: rgba(var(--color-foreground), 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  .custom-faq-accordion summary {
+    padding: 2rem !important;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .custom-faq-accordion summary:hover .accordion__title {
+    color: rgba(var(--color-foreground), 1);
+  }
+
+  .custom-faq-accordion .accordion__title {
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin: 0;
+    color: rgba(var(--color-foreground), 0.85);
+    transition: color 0.3s ease;
+    line-height: 1.4;
+  }
+
+  .custom-faq-accordion .icon-caret {
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 1.5rem;
+    height: 1.5rem;
+    opacity: 0.7;
+  }
+
+  .custom-faq-accordion details[open] > summary .icon-caret {
+    transform: rotate(180deg);
+    opacity: 1;
+  }
+
+  .custom-faq-accordion .accordion__content {
+    padding: 0 2rem 2rem 2rem !important;
+    margin-bottom: 0 !important;
+    font-size: 1.5rem;
+    line-height: 1.6;
+    color: rgba(var(--color-foreground), 0.75);
+    animation: fadeInSlideDown 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  @keyframes fadeInSlideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Target specific links in answers */
+  .custom-faq-accordion .accordion__content a {
+    color: rgba(var(--color-foreground), 0.9);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    transition: color 0.3s ease;
+  }
+  
+  .custom-faq-accordion .accordion__content a:hover {
+    color: rgba(var(--color-foreground), 1);
+  }
+
+{%- endstyle -%}
+
+<div class="color-{{ section.settings.color_scheme }} gradient">
+  <div class="collapsible-content isolate page-width section-{{ section.id }}-padding">
+    <div class="collapsible-content__wrapper">
+      <div class="collapsible-content-wrapper-narrow">
+        <div class="collapsible-content__header" style="text-align: {{ section.settings.heading_alignment }};">
+          {%- if section.settings.heading != blank -%}
+            <h2 class="collapsible-content__heading inline-richtext {{ section.settings.heading_size }}">
+              {{ section.settings.heading }}
+            </h2>
+          {%- endif -%}
+        </div>
+
+        <div class="grid grid--1-col collapsible-content__grid">
+          <div class="grid__item">
+            {%- for block in section.blocks -%}
+              {%- case block.type -%}
+                {%- when 'category_heading' -%}
+                  <h2 class="faq-category-heading h3" {{ block.shopify_attributes }}>
+                    {{ block.settings.title | escape }}
+                  </h2>
+                {%- when 'faq_item' -%}
+                  <div class="accordion custom-faq-accordion" {{ block.shopify_attributes }}>
+                    <details id="Details-{{ block.id }}-{{ section.id }}" {% if section.settings.open_first_collapsible_row and forloop.index == 2 %}open{% endif %}>
+                      <summary id="Summary-{{ block.id }}-{{ section.id }}">
+                        <h3 class="accordion__title inline-richtext h4">
+                          {{ block.settings.question | escape }}
+                        </h3>
+                        {{- 'icon-caret.svg' | inline_asset_content -}}
+                      </summary>
+                      <div class="accordion__content rte" id="CollapsibleAccordion-{{ block.id }}-{{ section.id }}" role="region" aria-labelledby="Summary-{{ block.id }}-{{ section.id }}">
+                        {{ block.settings.answer }}
+                      </div>
+                    </details>
+                  </div>
+              {%- endcase -%}
+            {%- endfor -%}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const detailsElements = document.querySelectorAll('.custom-faq-accordion details');
+    
+    detailsElements.forEach((details) => {
+      details.addEventListener('toggle', (e) => {
+        if (details.open) {
+          // Close all other details elements
+          detailsElements.forEach((otherDetails) => {
+            if (otherDetails !== details && otherDetails.open) {
+              otherDetails.removeAttribute('open');
+            }
+          });
+        }
+      });
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "FAQ",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Frequently Asked Questions"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        { "value": "h2", "label": "t:sections.all.heading_size.options__1.label" },
+        { "value": "h1", "label": "t:sections.all.heading_size.options__2.label" },
+        { "value": "h0", "label": "t:sections.all.heading_size.options__3.label" }
+      ],
+      "default": "h1",
+      "label": "t:sections.all.heading_size.label"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "Heading alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "checkbox",
+      "id": "open_first_collapsible_row",
+      "default": false,
+      "label": "Open first question by default"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category_heading",
+      "name": "Category Heading",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "Category Name"
+        }
+      ]
+    },
+    {
+      "type": "faq_item",
+      "name": "FAQ Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "Frequently asked question"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer",
+          "default": "<p>Provide the answer to the question here.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ",
+      "blocks": [
+        { "type": "category_heading" },
+        { "type": "faq_item" },
+        { "type": "faq_item" }
+      ]
+    }
+  ]
+}
+{% endschema %}

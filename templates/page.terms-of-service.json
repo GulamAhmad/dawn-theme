@@ -1,0 +1,14 @@
+{
+  "sections": {
+    "main": {
+      "type": "policy-terms"
+    },
+    "custom_footer": {
+      "type": "custom-footer"
+    }
+  },
+  "order": [
+    "main",
+    "custom_footer"
+  ]
+}

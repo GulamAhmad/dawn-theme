@@ -23,18 +23,27 @@
   assign all_variant_options_string = ''
   for option in product.options_with_values
     for value in option.values
-      assign all_variant_options_string = all_variant_options_string | append: value | append: '|||'
+      assign value_downcase = value | downcase | strip
+      assign all_variant_options_string = all_variant_options_string | append: value_downcase | append: '|||'
     endfor
   endfor
   assign all_variant_options = all_variant_options_string | split: '|||'
 
   assign visible_media_ids_string = ''
   assign current_variant = product.selected_or_first_available_variant
+  assign current_variant_options_downcase = ''
+  for option in current_variant.options
+    assign option_downcase = option | downcase | strip
+    assign current_variant_options_downcase = current_variant_options_downcase | append: option_downcase | append: '|||'
+  endfor
+  assign current_variant_options = current_variant_options_downcase | split: '|||'
+
   for media in product.media
     assign is_visible = true
+    assign media_alt_downcase = media.alt | downcase | strip
     if media.alt != blank and media.alt != product.title
-      if all_variant_options contains media.alt
-        unless current_variant.options contains media.alt
+      if all_variant_options contains media_alt_downcase
+        unless current_variant_options contains media_alt_downcase
           assign is_visible = false
         endunless
       endif

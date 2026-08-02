@@ -1,0 +1,175 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-faq",
+      "blocks": {
+        "cat1": {
+          "type": "category_heading",
+          "settings": {
+            "title": "Product & Lighting"
+          }
+        },
+        "q1": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What is LAMBATY, and what makes it different from a regular desk lamp?",
+            "answer": "<p>LAMBATY is a smart RGB desk lamp designed to combine practical everyday lighting with immersive ambient color. It gives you adjustable white light for work, studying, and everyday use, plus RGBIC lighting, dynamic effects, music sync, app control, touch control, and a highly adjustable design that can transform the atmosphere of your setup.</p>"
+          }
+        },
+        "q2": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What lighting options does the LAMBATY lamp offer?",
+            "answer": "<p>LAMBATY combines adjustable white light with RGBIC color lighting for both practical and ambient use. You can choose from five white-light temperatures, adjust brightness across ten levels, explore 200+ dynamic modes through the app, and access 21 RGBIC modes directly through the touch control panel.</p><p>The app also includes color controls, lighting scenes, dynamic effects, and rhythm-based modes.</p>"
+          }
+        },
+        "q3": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can I use the white light and RGBIC lighting at the same time?",
+            "answer": "<p>No. The white light and RGBIC lighting operate separately and cannot be turned on at the same time. You can easily switch between practical white lighting and immersive RGBIC lighting depending on how you want to use your space.</p>"
+          }
+        },
+        "q4": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can I adjust the brightness and color temperature of the white light?",
+            "answer": "<p>Yes. The white light offers five color temperatures: 3000K, 3500K, 4000K, 5000K, and 6500K.</p><p>You can also adjust brightness across ten levels from 10% to 100%, making it easy to create warmer lighting for a relaxed atmosphere or cooler, brighter lighting for work and studying.</p>"
+          }
+        },
+        "q5": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Does the lamp react to music and sound?",
+            "answer": "<p>Yes. LAMBATY supports music-responsive lighting that changes with rhythm and sound. You can use the lamp's built-in microphone to react to surrounding audio, use your phone's microphone through the app, or play compatible music stored on your phone and let the lighting respond in real time.</p>"
+          }
+        },
+        "cat2": {
+          "type": "category_heading",
+          "settings": {
+            "title": "Control & App"
+          }
+        },
+        "q6": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How can I control the LAMBATY lamp?",
+            "answer": "<p>You can control LAMBATY in two ways:</p><ul><li><strong>Touch control:</strong> Quickly switch lighting modes, adjust brightness or speed, set the built-in timer, and control white or RGBIC lighting directly from the lamp.</li><li><strong>App control:</strong> Use the LotusLamp X app for deeper customization, including colors, dynamic modes, lighting scenes, music sync, schedules, brightness, speed, and more.</li></ul><p>This gives you quick physical control when you need it and more advanced customization from your phone.</p>"
+          }
+        },
+        "q7": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What app does the lamp use, and how do I connect it?",
+            "answer": "<p>LAMBATY uses the LotusLamp X app, available through the Apple App Store and Google Play Store.</p><p>To connect:</p><ol><li>Power on the lamp.</li><li>Turn on Bluetooth on your phone.</li><li>Open LotusLamp X.</li><li>Allow the app to detect and add the lamp.</li></ol><p>In most cases, the lamp should be detected automatically. If it is not, you can add it manually through the \"+\" > Add Device option inside the app.</p>"
+          }
+        },
+        "q8": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can I control multiple LAMBATY lamps together?",
+            "answer": "<p>Yes. LotusLamp X allows you to add multiple compatible lamps and create groups for unified control. This is especially useful for larger gaming setups, shared workspaces, studios, or rooms where you want several lamps to work together.</p>"
+          }
+        },
+        "q9": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How many lamps can I connect to the app at the same time?",
+            "answer": "<p>The LotusLamp X app supports multiple lamps at the same time:</p><ul><li>Up to 3 light devices simultaneously on Android</li><li>Up to 5 light devices simultaneously on iOS</li></ul><p>You can keep multiple lamps connected, switch between them, and organize compatible lamps into groups for easier unified control. Each individual lamp can be actively controlled by one phone or device at a time. If another phone connects to the same lamp, the previous device will be disconnected from that lamp.</p>"
+          }
+        },
+        "q10": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can I schedule the lamp to turn on or off automatically?",
+            "answer": "<p>Yes. Through the LotusLamp X app, you can schedule the lamp to turn on or off automatically at your preferred times. This is useful for daily routines, work sessions, evening lighting, or having your setup ready when you need it.</p>"
+          }
+        },
+        "cat3": {
+          "type": "category_heading",
+          "settings": {
+            "title": "Setup & Compatibility"
+          }
+        },
+        "q11": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What desk thickness can the clamp fit?",
+            "answer": "<p>The clamp is designed for tabletops up to 6.35 cm thick. For the best fit and stability, attach it to a firm, suitable desk edge and tighten the clamp securely before adjusting the lamp.</p>"
+          }
+        },
+        "q12": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Is the lamp difficult to install, and do I need to drill into my desk or wall?",
+            "answer": "<p>No drilling is required for standard installation. LAMBATY attaches directly to a suitable desk edge using its metal clamp.</p><p>Simply:</p><ol><li>Position the clamp on the desk.</li><li>Tighten it securely.</li><li>Connect the supplied adapter to the lamp.</li><li>Plug the adapter into a power socket.</li></ol><p>The lamp is designed for indoor use and does not require permanent installation into your desk or wall.</p>"
+          }
+        },
+        "q13": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How far away can I control the lamp from my phone?",
+            "answer": "<p>The stated control distance is at least 5 meters under suitable conditions. Actual range may vary depending on your smartphone, surrounding interference, and the environment between your phone and the lamp.</p>"
+          }
+        },
+        "cat4": {
+          "type": "category_heading",
+          "settings": {
+            "title": "Safety & Troubleshooting"
+          }
+        },
+        "q14": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What should I do if the lamp does not connect to the app?",
+            "answer": "<p>First, make sure:</p><ul><li>The lamp is powered on</li><li>Bluetooth is enabled on your phone</li><li>LotusLamp X is open</li><li>Your phone is close to the lamp</li></ul><p>If the lamp is not detected automatically, tap the \"+\" icon in the app, select Add Device, choose the lamp, and complete the connection manually.</p><p>If the lamp is already paired to another controlling phone, disconnect it from that device before trying again.</p><p>For further assistance, check out our <a href=\"/pages/contact\">Contact Us</a> page.</p>"
+          }
+        },
+        "q15": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What should I do if the RGB colors display incorrectly or some lights stop working?",
+            "answer": "<p>If the RGB colors appear in the wrong order, open Edit Device Information > Wires Order in the app and adjust the RGB order until the colors display correctly.</p><p>If some lights are not working:</p><ol><li>Go to Edit Device Information > Pixel Setting.</li><li>Set the value to 39.</li></ol><p>You can also perform a factory reset by:</p><ol><li>Unplugging the lamp.</li><li>Plugging it back in.</li><li>Pressing and holding the \"A\" button on the touch panel for 5 seconds.</li></ol><p>If the issue continues after troubleshooting, contact LAMBATY support at info@lambaty.sa, or review our <a href=\"/policies/refund-policy\">Returns / Refund Policy</a> and <a href=\"/policies/shipping-policy\">Shipping Policy</a> pages.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "cat1",
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5",
+        "cat2",
+        "q6",
+        "q7",
+        "q8",
+        "q9",
+        "q10",
+        "cat3",
+        "q11",
+        "q12",
+        "q13",
+        "cat4",
+        "q14",
+        "q15"
+      ],
+      "settings": {
+        "heading": "Frequently Asked Questions",
+        "heading_size": "h1",
+        "heading_alignment": "center",
+        "color_scheme": "scheme-1",
+        "open_first_collapsible_row": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "custom_footer": {
+      "type": "custom-footer"
+    }
+  },
+  "order": [
+    "main",
+    "custom_footer"
+  ]
+}
