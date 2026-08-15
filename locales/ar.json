@@ -78,7 +78,9 @@
     "total_reviews": "إجمالي التقييمات",
     "star_reviews_info": "{{ rating_value }} من {{ rating_max }} نجوم",
     "collapsible_content_title": "محتوى قابل للطي",
-    "complementary_products": "منتجات مكملة"
+    "complementary_products": "منتجات مكملة",
+    "show_more": "عرض المزيد",
+    "show_less": "عرض أقل"
   },
   "blogs": {
     "article": {
@@ -105,11 +107,31 @@
     "collection_title": "اسم المجموعة"
   },
   "products": {
+    "lambaty": {
+      "price_sar": "650 ريال سعودي",
+      "pill_colors": "16 مليون لون",
+      "pill_music": "مزامنة الموسيقى",
+      "pill_app": "تحكم بالتطبيق واللمس",
+      "pill_dual": "إضاءة مزدوجة الجوانب",
+      "pill_dynamic": "أوضاع ديناميكية",
+      "pill_wings": "أجنحة قابلة للتعديل",
+      "spec_dc": "تيار مستمر 12 فولت / 24 واط",
+      "spec_ac": "تيار متردد 220-240 فولت، 50/60 هرتز",
+      "feat_1_title": "16 مليون لون",
+      "feat_1_desc": "كل درجة لون تتخيلها مع مزج ألوان سلس للغاية وإعدادات مسبقة للمشاهد.",
+      "feat_2_title": "مزامنة الموسيقى",
+      "feat_2_desc": "تنبض الألوان وتتراقص في الوقت الفعلي مع موسيقاك عبر الميكروفون المدمج.",
+      "feat_3_title": "تحكم بالتطبيق واللمس",
+      "feat_3_desc": "تحكم كامل من هاتفك الذكي أو عبر مستشعر اللمس الموجود على المصباح مباشرة.",
+      "feat_4_title": "أوضاع ديناميكية",
+      "feat_4_desc": "وميض، تنفس، قوس قزح، والمزيد — عشرات التأثيرات لكل إعداد ومزاج."
+    },
     "product": {
       "add_to_cart": "أضف إلى السلة",
       "choose_options": "اختر الخيارات",
       "choose_product_options": "اختر خيارات {{ product_name }}",
       "description": "الوصف",
+      "lambaty_description_fallback": "يجمع المصباح المكتبي الذكي LAMBATY بين الإضاءة البيضاء المركزة والأجواء الغامرة بألوان RGB في مصباح مكتبي واحد قابل للتعديل. تحكم في الإضاءة مباشرة من المصباح أو عبر التطبيق، وقم بالتبديل بين ملايين الألوان والتأثيرات الديناميكية، وقم بمزامنة الإضاءة مع الموسيقى، واضبط الأجنحة لتناسب إعدادك.",
       "inventory_in_stock": "متوفر",
       "inventory_in_stock_show_count": "{{ quantity }} متوفر",
       "inventory_low_stock": "مخزون منخفض",
@@ -179,7 +201,11 @@
       "taxes_included": "الضرائب مشمولة.",
       "duties_included": "الرسوم مشمولة.",
       "duties_and_taxes_included": "الرسوم والضرائب مشمولة.",
-      "shipping_policy_html": "<a href=\"{{ link }}\">الشحن</a> يُحسب عند الدفع."
+      "shipping_policy_html": "<a href=\"{{ link }}\">الشحن</a> يُحسب عند الدفع.",
+      "free_shipping": "شحن مجاني",
+      "warranty": "ضمان سنة واحدة",
+      "secure_payment": "دفع آمن",
+      "easy_returns": "إرجاع سهل"
     },
     "modal": {
       "label": "معرض الوسائط"

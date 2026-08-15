@@ -78,7 +78,9 @@
     "total_reviews": "total reviews",
     "star_reviews_info": "{{ rating_value }} out of {{ rating_max }} stars",
     "collapsible_content_title": "Collapsible content",
-    "complementary_products": "Complementary products"
+    "complementary_products": "Complementary products",
+    "show_more": "Show more",
+    "show_less": "Show less"
   },
   "blogs": {
     "article": {
@@ -105,11 +107,31 @@
     "collection_title": "Your collection's name"
   },
   "products": {
+    "lambaty": {
+      "price_sar": "650 SAR",
+      "pill_colors": "16 Million Colors",
+      "pill_music": "Music Sync",
+      "pill_app": "App + Touch Control",
+      "pill_dual": "Dual-Sided Lighting",
+      "pill_dynamic": "Dynamic Modes",
+      "pill_wings": "Adjustable Wings",
+      "spec_dc": "DC 12V / 24W",
+      "spec_ac": "AC 220–240V, 50/60Hz",
+      "feat_1_title": "16 Million Colors",
+      "feat_1_desc": "Every shade you can imagine with buttery-smooth color mixing and scene presets.",
+      "feat_2_title": "Music Sync",
+      "feat_2_desc": "Colors pulse and dance in real-time with your music through the built-in microphone.",
+      "feat_3_title": "App + Touch Control",
+      "feat_3_desc": "Full control from your smartphone or via the touch sensor directly on the lamp.",
+      "feat_4_title": "Dynamic Modes",
+      "feat_4_desc": "Strobe, breathe, rainbow, and more — dozens of effects for every setup and mood."
+    },
     "product": {
       "add_to_cart": "Add to cart",
       "choose_options": "Choose options",
       "choose_product_options": "Choose options for {{ product_name }}",
       "description": "Description",
+      "lambaty_description_fallback": "The LAMBATY Smart RGB Desk Lamp combines focused white lighting with immersive RGB ambience in one adjustable desk lamp. Control the lighting directly from the lamp or through the app, switch between millions of colors and dynamic effects, sync the lighting with music, and adjust the wings to suit your setup.",
       "inventory_in_stock": "In stock",
       "inventory_in_stock_show_count": "{{ quantity }} in stock",
       "inventory_low_stock": "Low stock",
@@ -179,7 +201,11 @@
       "taxes_included": "Taxes included.",
       "duties_included": "Duties included.",
       "duties_and_taxes_included": "Duties and taxes included.",
-      "shipping_policy_html": "<a href=\"{{ link }}\">Shipping</a> calculated at checkout."
+      "shipping_policy_html": "<a href=\"{{ link }}\">Shipping</a> calculated at checkout.",
+      "free_shipping": "Free Shipping",
+      "warranty": "1-Year Warranty",
+      "secure_payment": "Secure Payment",
+      "easy_returns": "Easy Returns"
     },
     "modal": {
       "label": "Media gallery"

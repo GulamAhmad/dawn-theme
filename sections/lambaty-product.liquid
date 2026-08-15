@@ -1,0 +1,266 @@
+
+<product-info
+  id="MainProduct-{{ section.id }}"
+  class="lambaty-product-page"
+  data-section="{{ section.id }}"
+  data-product-id="{{ product.id }}"
+  data-update-url="true"
+  data-url="{{ product.url }}"
+>
+  {{ 'section-main-product.css' | asset_url | stylesheet_tag }}
+  {{ 'component-price.css' | asset_url | stylesheet_tag }}
+  {{ 'component-slider.css' | asset_url | stylesheet_tag }}
+  {{ 'component-deferred-media.css' | asset_url | stylesheet_tag }}
+  {{ 'lambaty-product.css' | asset_url | stylesheet_tag }}
+
+  <script src="{{ 'product-info.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+
+  {% assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src' %}
+  {%- assign product_form_id = 'product-form-' | append: section.id -%}
+
+  <!-- ═══════════════════════════════════════
+       HERO
+       ═══════════════════════════════════════ -->
+  <section class="lp-hero">
+    <!-- Ambient orbs -->
+    <div class="lp-orb lp-orb--1" aria-hidden="true"></div>
+    <div class="lp-orb lp-orb--2" aria-hidden="true"></div>
+    <div class="lp-orb lp-orb--3" aria-hidden="true"></div>
+
+    <div class="page-width lp-hero__grid">
+
+      <!-- ── Left: image ── -->
+      <div class="lp-media">
+        <div class="lp-media__halo" aria-hidden="true"></div>
+        <div class="lp-media__gallery">
+          {% render 'product-media-gallery', variant_images: variant_images %}
+        </div>
+      </div>
+
+      <!-- ── Right: info ── -->
+      <div id="ProductInfo-{{ section.id }}" class="lp-info" dir="auto">
+
+        <div class="lp-title">
+          {% if section.settings.title_graphic != blank %}
+            <img src="{{ section.settings.title_graphic | image_url: width: 900 }}" alt="SMART RGB DESK LAMP" loading="eager">
+          {% else %}
+            <img src="{{ 'SMART Logo.png' | asset_url }}" alt="SMART RGB DESK LAMP" loading="eager">
+          {% endif %}
+        </div>
+
+        <div class="lp-price-row">
+          <span class="lp-price">{{ 'products.lambaty.price_sar' | t }}</span>
+          <span class="lp-free-shipping">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h11a2 2 0 012 2v3M9 21a2 2 0 100-4 2 2 0 000 4zm10 0a2 2 0 100-4 2 2 0 000 4M13 9h8l2 5H13V9z"/></svg>
+            {{ 'products.product.free_shipping' | t }}
+          </span>
+        </div>
+
+        <!-- Description -->
+        <div class="lp-desc-wrap">
+          <div class="lp-description" id="lp-desc-{{ section.id }}">
+            {{ 'products.product.lambaty_description_fallback' | t }}
+          </div>
+        </div>
+
+        <div class="lp-pills">
+          <span class="lp-pill lp-pill--c">{{ 'products.lambaty.pill_colors' | t }}</span>
+          <span class="lp-pill lp-pill--m">{{ 'products.lambaty.pill_music' | t }}</span>
+          <span class="lp-pill lp-pill--a">{{ 'products.lambaty.pill_app' | t }}</span>
+          <span class="lp-pill lp-pill--c">{{ 'products.lambaty.pill_dual' | t }}</span>
+          <span class="lp-pill lp-pill--m">{{ 'products.lambaty.pill_dynamic' | t }}</span>
+          <span class="lp-pill lp-pill--a">{{ 'products.lambaty.pill_wings' | t }}</span>
+        </div>
+
+        <div class="lp-specs-row">
+          <div class="lp-spec-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+            {{ 'products.lambaty.spec_dc' | t }}
+          </div>
+          <div class="lp-spec-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+            {{ 'products.lambaty.spec_ac' | t }}
+          </div>
+        </div>
+
+        <div class="lp-buy">
+          {%- render 'buy-buttons',
+            block: section,
+            product: product,
+            product_form_id: product_form_id,
+            section_id: section.id,
+            show_pickup_availability: false
+          -%}
+        </div>
+
+        <div class="lp-trust">
+          <div class="lp-trust__item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622C17.176 19.29 21 14.591 21 9c0-1.006-.12-1.985-.382-2.916z"/></svg>
+            {{ 'products.product.warranty' | t }}
+          </div>
+          <div class="lp-trust__item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+            {{ 'products.product.secure_payment' | t }}
+          </div>
+          <div class="lp-trust__item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
+            {{ 'products.product.easy_returns' | t }}
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       FEATURES BAND
+       ═══════════════════════════════════════ -->
+  <section class="lp-features">
+    <div class="page-width lp-features__grid">
+
+      <div class="lp-feat-card">
+        <div class="lp-feat-card__icon lp-feat-card__icon--c">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        </div>
+        <h3>{{ 'products.lambaty.feat_1_title' | t }}</h3>
+        <p>{{ 'products.lambaty.feat_1_desc' | t }}</p>
+      </div>
+
+      <div class="lp-feat-card">
+        <div class="lp-feat-card__icon lp-feat-card__icon--m">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+        </div>
+        <h3>{{ 'products.lambaty.feat_2_title' | t }}</h3>
+        <p>{{ 'products.lambaty.feat_2_desc' | t }}</p>
+      </div>
+
+      <div class="lp-feat-card">
+        <div class="lp-feat-card__icon lp-feat-card__icon--a">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18" stroke-linecap="round" stroke-width="2"/></svg>
+        </div>
+        <h3>{{ 'products.lambaty.feat_3_title' | t }}</h3>
+        <p>{{ 'products.lambaty.feat_3_desc' | t }}</p>
+      </div>
+
+      <div class="lp-feat-card">
+        <div class="lp-feat-card__icon lp-feat-card__icon--c">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        </div>
+        <h3>{{ 'products.lambaty.feat_4_title' | t }}</h3>
+        <p>{{ 'products.lambaty.feat_4_desc' | t }}</p>
+      </div>
+
+    </div>
+  </section>
+
+  {% render 'product-media-modal', variant_images: variant_images %}
+  {%- if product.media.size > 0 -%}
+    <script src="{{ 'product-modal.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'media-gallery.js' | asset_url }}" defer="defer"></script>
+  {%- endif -%}
+
+  <script>
+    /* ── LAMBATY Gallery Switcher ──
+       Ensures thumbnail clicks reliably switch the main image
+       by directly managing is-active class, independently of
+       Dawn's scroll-based slider mechanism which we've disabled. */
+    (function initLambatyGallery() {
+      function setup(gallery) {
+        const viewer   = gallery.querySelector('[id^="GalleryViewer"]');
+        const thumbNav = gallery.querySelector('[id^="GalleryThumbnails"]');
+        if (!viewer || !thumbNav) return;
+
+        thumbNav.addEventListener('click', function(e) {
+          const btn = e.target.closest('button.thumbnail');
+          if (!btn) return;
+
+          const li = btn.closest('[data-target]');
+          if (!li) return;
+
+          const targetId = li.dataset.target; // e.g. "sectionId-mediaId"
+
+          /* -- switch main slide -- */
+          viewer.querySelectorAll('.product__media-item').forEach(function(item) {
+            item.classList.remove('is-active');
+          });
+          const targetSlide = viewer.querySelector('[data-media-id="' + targetId + '"]');
+          if (targetSlide) targetSlide.classList.add('is-active');
+
+          /* -- switch thumbnail active state -- */
+          thumbNav.querySelectorAll('button.thumbnail').forEach(function(b) {
+            b.removeAttribute('aria-current');
+          });
+          btn.setAttribute('aria-current', 'true');
+        });
+      }
+
+      function run() {
+        document.querySelectorAll('media-gallery').forEach(setup);
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', run);
+      } else {
+        run();
+      }
+    })();
+
+
+  </script>
+
+</product-info>
+
+{% schema %}
+{
+  "name": "LAMBATY Product",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "title_graphic",
+      "label": "Title Graphic (SMART RGB DESK LAMP)"
+    },
+    {
+      "type": "select",
+      "id": "gallery_layout",
+      "options": [
+        { "value": "stacked", "label": "Stacked" },
+        { "value": "columns", "label": "Columns" },
+        { "value": "thumbnail", "label": "Thumbnail" },
+        { "value": "thumbnail_slider", "label": "Thumbnail slider" }
+      ],
+      "default": "thumbnail",
+      "label": "Gallery layout"
+    },
+    {
+      "type": "select",
+      "id": "media_size",
+      "options": [
+        { "value": "small", "label": "Small" },
+        { "value": "medium", "label": "Medium" },
+        { "value": "large", "label": "Large" }
+      ],
+      "default": "large",
+      "label": "Media size"
+    },
+    {
+      "type": "select",
+      "id": "mobile_thumbnails",
+      "options": [
+        { "value": "hide", "label": "Hide" },
+        { "value": "show", "label": "Show" }
+      ],
+      "default": "show",
+      "label": "Mobile thumbnails"
+    }
+  ],
+  "presets": [
+    {
+      "name": "LAMBATY Product"
+    }
+  ]
+}
+{% endschema %}
+
