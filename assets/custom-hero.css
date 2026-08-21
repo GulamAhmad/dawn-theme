@@ -182,12 +182,12 @@
   gap: 8px;
   background: #fff;
   color: #060810;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   border-radius: 4px;
-  padding: 14px 32px;
+  padding: 10px 24px;
   border: none;
   cursor: pointer;
   box-sizing: border-box;
@@ -496,6 +496,90 @@
   to { opacity: 1; }
 }
 
+/* VIDEO MODAL */
+.video-modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  padding: 16px;
+}
+
+.video-modal-overlay.active {
+  opacity: 1;
+}
+
+.video-modal-content {
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+  background: #000;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.5);
+  transform: scale(0.95);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  /* 16:9 aspect ratio container */
+  aspect-ratio: 16 / 9;
+}
+
+.video-modal-overlay.active .video-modal-content {
+  transform: scale(1);
+}
+
+.video-modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.5);
+  border: none;
+  color: #fff;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s;
+  padding: 0;
+}
+
+.video-modal-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+#heroVideo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .video-modal-content {
+    border-radius: 8px;
+    max-height: 85vh;
+    aspect-ratio: 9 / 16;
+  }
+  #heroVideo {
+    object-fit: cover;
+  }
+  .video-modal-close {
+    top: 8px;
+    right: 8px;
+    width: 32px;
+    height: 32px;
+  }
+}
+
 /* RTL SUPPORT */
 [dir="rtl"] .hero-right {
   right: auto;
@@ -661,7 +745,7 @@
   .primary-btn {
     width: 100%;
     justify-content: center;
-    padding: 14px 20px;
+    padding: 10px 16px;
     white-space: nowrap;
   }
   

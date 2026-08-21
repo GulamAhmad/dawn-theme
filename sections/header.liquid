@@ -2,16 +2,16 @@
 
 <nav class="hero-navbar">
   <div class="nav-inner">
-    <a href="/" class="nav-logo-link">
+    <a href="{{ routes.root_url }}" class="nav-logo-link">
       <img src="{{ 'White Logo Tag copy.png' | asset_url }}" alt="LAMBATY" class="header-logo-img" />
     </a>
     <div class="nav-links">
-      <a href="#rgb">{% if request.locale.iso_code == 'ar' %}RGB{% else %}RGB{% endif %}</a>
-      <a href="#music">{% if request.locale.iso_code == 'ar' %}موسيقى{% else %}MUSIC{% endif %}</a>
-      <a href="#productivity">{% if request.locale.iso_code == 'ar' %}إنتاجية{% else %}PRODUCTIVITY{% endif %}</a>
-      <a href="#usecases">{% if request.locale.iso_code == 'ar' %}إعدادات{% else %}SETUPS{% endif %}</a>
-      <a href="#engineering">{% if request.locale.iso_code == 'ar' %}تصميم{% else %}DESIGN{% endif %}</a>
-      <a href="#socials">{% if request.locale.iso_code == 'ar' %}مجتمع{% else %}SOCIALS{% endif %}</a>
+      <a href="{{ routes.root_url }}#rgb">{% if request.locale.iso_code == 'ar' %}RGB{% else %}RGB{% endif %}</a>
+      <a href="{{ routes.root_url }}#music">{% if request.locale.iso_code == 'ar' %}موسيقى{% else %}MUSIC{% endif %}</a>
+      <a href="{{ routes.root_url }}#productivity">{% if request.locale.iso_code == 'ar' %}إنتاجية{% else %}PRODUCTIVITY{% endif %}</a>
+      <a href="{{ routes.root_url }}#usecases">{% if request.locale.iso_code == 'ar' %}إعدادات{% else %}SETUPS{% endif %}</a>
+      <a href="{{ routes.root_url }}#engineering">{% if request.locale.iso_code == 'ar' %}تصميم{% else %}DESIGN{% endif %}</a>
+      <a href="{{ routes.root_url }}#socials">{% if request.locale.iso_code == 'ar' %}مجتمع{% else %}SOCIALS{% endif %}</a>
     </div>
     <div class="nav-right">
       {%- form 'localization', id: 'HeaderLanguageForm', class: 'localization-form' -%}
@@ -26,7 +26,7 @@
         <div class="live-dot"></div>
         <span>{% if request.locale.iso_code == 'ar' %}اتصل بنا{% else %}CONTACT US{% endif %}</span>
       </a>
-      <a href="{{ section.settings.shop_link | default: routes.all_products_collection_url }}" class="nav-cta" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">{% if request.locale.iso_code == 'ar' %}تسوق الآن{% else %}Shop Now{% endif %}</a>
+      <a href="{{ section.settings.shop_link | default: collections['all'].products.first.url }}" class="nav-cta" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">{% if request.locale.iso_code == 'ar' %}تسوق الآن{% else %}Shop Now{% endif %}</a>
     </div>
   </div>
 </nav>

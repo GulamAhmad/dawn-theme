@@ -59,18 +59,12 @@
 
         <!-- Description -->
         <div class="lp-desc-wrap">
-          <div class="lp-description" id="lp-desc-{{ section.id }}">
+          <div class="lp-description collapsed" id="lp-desc-{{ section.id }}">
             {{ 'products.product.lambaty_description_fallback' | t }}
           </div>
-        </div>
-
-        <div class="lp-pills">
-          <span class="lp-pill lp-pill--c">{{ 'products.lambaty.pill_colors' | t }}</span>
-          <span class="lp-pill lp-pill--m">{{ 'products.lambaty.pill_music' | t }}</span>
-          <span class="lp-pill lp-pill--a">{{ 'products.lambaty.pill_app' | t }}</span>
-          <span class="lp-pill lp-pill--c">{{ 'products.lambaty.pill_dual' | t }}</span>
-          <span class="lp-pill lp-pill--m">{{ 'products.lambaty.pill_dynamic' | t }}</span>
-          <span class="lp-pill lp-pill--a">{{ 'products.lambaty.pill_wings' | t }}</span>
+          <button type="button" class="lp-read-more" onclick="var desc = this.previousElementSibling; if (desc.classList.contains('collapsed')) { desc.classList.remove('collapsed'); this.textContent = this.getAttribute('data-less'); } else { desc.classList.add('collapsed'); this.textContent = this.getAttribute('data-more'); }" data-more="{% if request.locale.iso_code == 'ar' %}عرض المزيد{% else %}Show more{% endif %}" data-less="{% if request.locale.iso_code == 'ar' %}عرض أقل{% else %}Show less{% endif %}">
+            {% if request.locale.iso_code == 'ar' %}عرض المزيد{% else %}Show more{% endif %}
+          </button>
         </div>
 
         <div class="lp-specs-row">

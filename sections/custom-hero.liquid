@@ -44,43 +44,26 @@
 
       <p class="hero-subtext">
         {% if request.locale.iso_code == 'ar' %}
-          إضاءة RGB غامرة. <span class="bold-white">إنتاجية دافئة.</span> محركا إضاءة مستقلان — أحدهما للجو العام، والآخر للعمل. مصباح المكتب الوحيد الذي ستحتاجه.
+          إضاءة RGB غامرة. <span class="bold-white">إنتاجية دافئة.</span> محركا إضاءة مستقلان — أحدهما للجو العام،
+          والآخر للعمل. مصباح المكتب الوحيد الذي ستحتاجه.
         {% else %}
           Immersive RGB.
-          <span class="bold-white">Warm productivity.</span> Two independent
-          light engines — one for the ambience, one for the work. The only
-          desk lamp you'll ever need.
+          <span class="bold-white">Warm productivity.</span> Two independent light engines — one for the ambience, one
+          for the work. The only desk lamp you'll ever need.
         {% endif %}
       </p>
 
       <div class="cta-row">
-        <a href="{{ section.settings.primary_cta_link | default: routes.all_products_collection_url }}" class="primary-btn" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">
-          {% if request.locale.iso_code == 'ar' %}اطلب مسبقاً الآن{% else %}Pre-order now{% endif %}
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+        <button class="primary-btn" onclick="openVideoModal()">
+          <div
+            class="play-circle"
+            style="background: rgba(255,255,255,0.2); margin-right: 8px; margin-left: {% if request.locale.iso_code == 'ar' %}8px{% else %}0{% endif %}; {% if request.locale.iso_code == 'ar' %}margin-right: 0;{% endif %}"
           >
-            <path d="M5 12h14M12 5l7 7-7 7" />
-          </svg>
-        </a>
-        <button class="ghost-btn">
-          <div class="play-circle">
-            <svg
-              width="8"
-              height="10"
-              viewBox="0 0 8 10"
-              fill="currentColor"
-            >
+            <svg width="8" height="10" viewBox="0 0 8 10" fill="currentColor">
               <path d="M0 0L8 5L0 10V0Z" />
             </svg>
           </div>
-          {% if request.locale.iso_code == 'ar' %}شاهد الفيديو{% else %}Watch the film{% endif %}
+          {% if request.locale.iso_code == 'ar' %}شاهدها وهي تعمل{% else %}See it in action{% endif %}
         </button>
       </div>
     </div>
@@ -109,7 +92,9 @@
     <!-- Bottom Elements -->
     <div class="scroll-cue">
       <div class="scroll-line"></div>
-      <span>{% if request.locale.iso_code == 'ar' %}مرر للاستكشاف{% else %}Scroll to explore{% endif %}</span>
+      <span>
+        {%- if request.locale.iso_code == 'ar' %}مرر للاستكشاف{% else %}Scroll to explore{% endif -%}
+      </span>
     </div>
 
     <div class="version-badge">
@@ -121,6 +106,55 @@
     </div>
   </section>
 </div>
+
+<!-- Video Modal -->
+<div id="videoModal" class="video-modal-overlay" onclick="closeVideoModal(event)">
+  <div class="video-modal-content">
+    <button class="video-modal-close" onclick="closeVideoModal(event, true)">
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+    <video id="heroVideo" controls playsinline>
+      {% if request.locale.iso_code == 'ar' %}
+        <source src="{{ 'v2 (1).mp4' | file_url }}" type="video/mp4">
+      {% else %}
+        <source src="{{ 'v1 (1).mp4' | file_url }}" type="video/mp4">
+      {% endif %}
+      Your browser does not support the video tag.
+    </video>
+  </div>
+</div>
+
+<script>
+  function openVideoModal() {
+    document.getElementById('videoModal').style.display = 'flex';
+    setTimeout(() => {
+      document.getElementById('videoModal').classList.add('active');
+      document.getElementById('heroVideo').play();
+    }, 10);
+  }
+
+  function closeVideoModal(event, forceClose) {
+    if (forceClose || event.target.id === 'videoModal') {
+      document.getElementById('videoModal').classList.remove('active');
+      setTimeout(() => {
+        document.getElementById('videoModal').style.display = 'none';
+        document.getElementById('heroVideo').pause();
+        document.getElementById('heroVideo').currentTime = 0;
+      }, 300); // match transition duration
+    }
+  }
+</script>
 <!-- END NEW HERO SECTION REPLICATION -->
 
 {% schema %}

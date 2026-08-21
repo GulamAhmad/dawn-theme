@@ -386,6 +386,30 @@
   margin: 0 0 0.75rem;
 }
 
+.lp-description.collapsed {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.lp-read-more {
+  background: transparent;
+  border: none;
+  color: var(--cyan, #00e5ff);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.lp-read-more:hover {
+  color: #fff;
+}
+
 
 
 /* Fix for rich-text HTML inside description */
