@@ -40,27 +40,18 @@
       </div>
       <video
         class="reel-video"
-        src="{{ section.settings.reel_1_video }}"
+        src="{% if section.settings.reel_1_video != blank %}{{ section.settings.reel_1_video }}{% else %}{{ 'Reel 1.mp4' | file_url }}{% endif %}"
         muted
         loop
         playsinline
-        preload="none"
+        autoplay
       ></video>
       <div class="reel-overlay"></div>
       <div class="reel-info">
-        <div class="reel-badge">{% if request.locale.iso_code == 'ar' %}إعداد مميز{% else %}FEATURED SETUP{% endif %}</div>
-        <h3 class="reel-creator">{{ section.settings.reel_1_creator | default: 'ALEX W.' }}</h3>
-        <div class="reel-env">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
-            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
-            <line x1="12" y1="22.08" x2="12" y2="12"></line>
-          </svg>
-          {{ section.settings.reel_1_env | default: 'Gaming Studio' }}
-        </div>
+        <h3 class="reel-creator">{% if request.locale.iso_code == 'ar' %}إعداد الألعاب{% else %}{{ section.settings.reel_1_title | default: 'Gaming Setup' }}{% endif %}</h3>
         <div class="reel-tags">
-          <span class="rs-tag">{% if request.locale.iso_code == 'ar' %}وضع RGB{% else %}RGB Mode{% endif %}</span>
-          <span class="rs-tag">{% if request.locale.iso_code == 'ar' %}مزامنة الموسيقى{% else %}Music Sync{% endif %}</span>
+          <span class="rs-tag">RGB MODE</span>
+          <span class="rs-tag">DYNAMIC MODES</span>
         </div>
       </div>
     </div>
@@ -78,27 +69,18 @@
       </div>
       <video
         class="reel-video"
-        src="{{ section.settings.reel_2_video }}"
+        src="{% if section.settings.reel_2_video != blank %}{{ section.settings.reel_2_video }}{% else %}{{ 'Reel 2.mp4' | file_url }}{% endif %}"
         muted
         loop
         playsinline
-        preload="none"
+        autoplay
       ></video>
       <div class="reel-overlay"></div>
       <div class="reel-info">
-        <div class="reel-badge">{% if request.locale.iso_code == 'ar' %}سلسلة المبدعين{% else %}CREATOR SERIES{% endif %}</div>
-        <h3 class="reel-creator">{{ section.settings.reel_2_creator | default: 'SARAH JENKINS' }}</h3>
-        <div class="reel-env">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-            <circle cx="8.5" cy="8.5" r="1.5"></circle>
-            <polyline points="21 15 16 10 5 21"></polyline>
-          </svg>
-          {{ section.settings.reel_2_env | default: 'Creator Workspace' }}
-        </div>
+        <h3 class="reel-creator">{% if request.locale.iso_code == 'ar' %}مكتب بسيط{% else %}{{ section.settings.reel_2_title | default: 'Minimal Desk' }}{% endif %}</h3>
         <div class="reel-tags">
-          <span class="rs-tag">{% if request.locale.iso_code == 'ar' %}إضاءة التركيز{% else %}Focus Lighting{% endif %}</span>
-          <span class="rs-tag">{% if request.locale.iso_code == 'ar' %}إعدادات ذكية مسبقة{% else %}Smart Presets{% endif %}</span>
+          <span class="rs-tag">AMBIENT LIGHTING</span>
+          <span class="rs-tag">APP CONTROL</span>
         </div>
       </div>
     </div>
@@ -115,100 +97,23 @@
       </div>
       <video
         class="reel-video"
-        src="{{ section.settings.reel_3_video }}"
+        src="{% if section.settings.reel_3_video != blank %}{{ section.settings.reel_3_video }}{% else %}{{ 'Reel 3.mp4' | file_url }}{% endif %}"
         muted
         loop
         playsinline
-        preload="none"
+        autoplay
       ></video>
       <div class="reel-overlay"></div>
       <div class="reel-info">
-        <div class="reel-badge">{% if request.locale.iso_code == 'ar' %}اختيار المجتمع{% else %}COMMUNITY PICK{% endif %}</div>
-        <h3 class="reel-creator">{{ section.settings.reel_3_creator | default: 'DAVID K.' }}</h3>
-        <div class="reel-env">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 2v20"></path>
-            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-          </svg>
-          {{ section.settings.reel_3_env | default: 'Minimal Desk' }}
-        </div>
+        <h3 class="reel-creator">{% if request.locale.iso_code == 'ar' %}إعداد الإنتاجية{% else %}{{ section.settings.reel_3_title | default: 'Productivity Setup' }}{% endif %}</h3>
         <div class="reel-tags">
-          <span class="rs-tag">{% if request.locale.iso_code == 'ar' %}أبيض دافئ{% else %}Warm White{% endif %}</span>
-          <span class="rs-tag">{% if request.locale.iso_code == 'ar' %}إضاءة التركيز{% else %}Focus Lighting{% endif %}</span>
+          <span class="rs-tag">WARM WHITE</span>
+          <span class="rs-tag">COOL WHITE</span>
         </div>
       </div>
     </div>
 
-    <!-- Reel 4 -->
-    <div class="reel-card rs-animate" data-index="3">
-      <div class="reel-card-placeholder">
-        <div class="reel-placeholder-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-          </svg>
-        </div>
-      </div>
-      <video
-        class="reel-video"
-        src="{{ section.settings.reel_4_video }}"
-        muted
-        loop
-        playsinline
-        preload="none"
-      ></video>
-      <div class="reel-overlay"></div>
-      <div class="reel-info">
-        <div class="reel-badge">{% if request.locale.iso_code == 'ar' %}إعداد مميز{% else %}FEATURED SETUP{% endif %}</div>
-        <h3 class="reel-creator">{{ section.settings.reel_4_creator | default: 'STUDIO 04' }}</h3>
-        <div class="reel-env">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-          </svg>
-          {{ section.settings.reel_4_env | default: 'Night Setup' }}
-        </div>
-        <div class="reel-tags">
-          <span class="rs-tag">{% if request.locale.iso_code == 'ar' %}وضع RGB{% else %}RGB Mode{% endif %}</span>
-        </div>
-      </div>
-    </div>
 
-    <!-- Reel 5 -->
-    <div class="reel-card rs-animate" data-index="4">
-      <div class="reel-card-placeholder">
-        <div class="reel-placeholder-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-            <line x1="8" y1="21" x2="16" y2="21"></line>
-            <line x1="12" y1="17" x2="12" y2="21"></line>
-          </svg>
-        </div>
-      </div>
-      <video
-        class="reel-video"
-        src="{{ section.settings.reel_5_video }}"
-        muted
-        loop
-        playsinline
-        preload="none"
-      ></video>
-      <div class="reel-overlay"></div>
-      <div class="reel-info">
-        <div class="reel-badge">{% if request.locale.iso_code == 'ar' %}سلسلة المبدعين{% else %}CREATOR SERIES{% endif %}</div>
-        <h3 class="reel-creator">{{ section.settings.reel_5_creator | default: 'MARCUS T.' }}</h3>
-        <div class="reel-env">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-            <line x1="8" y1="21" x2="16" y2="21"></line>
-            <line x1="12" y1="17" x2="12" y2="21"></line>
-          </svg>
-          {{ section.settings.reel_5_env | default: 'Productivity Corner' }}
-        </div>
-        <div class="reel-tags">
-          <span class="rs-tag">{% if request.locale.iso_code == 'ar' %}إضاءة التركيز{% else %}Focus Lighting{% endif %}</span>
-          <span class="rs-tag">{% if request.locale.iso_code == 'ar' %}إعدادات ذكية مسبقة{% else %}Smart Presets{% endif %}</span>
-        </div>
-      </div>
-    </div>
 
   </div>
   <!-- End Reel Container -->
@@ -241,19 +146,7 @@
       animCards.forEach(function (card) { card.classList.add('rs-visible'); });
     }
 
-    // ── Auto-play videos on hover ─────────────────────────
-    cards.forEach(function (card) {
-      var video = card.querySelector('.reel-video');
-      if (!video || !video.src) return;
-
-      card.addEventListener('mouseenter', function () {
-        video.play().catch(function () {});
-      });
-      card.addEventListener('mouseleave', function () {
-        video.pause();
-        video.currentTime = 0;
-      });
-    });
+    // Videos autoplay via HTML attribute
   }
 
   if (document.readyState === 'loading') {
@@ -274,15 +167,9 @@
     },
     {
       "type": "text",
-      "id": "reel_1_creator",
-      "label": "Creator Name",
-      "default": "ALEX W."
-    },
-    {
-      "type": "text",
-      "id": "reel_1_env",
-      "label": "Environment",
-      "default": "Gaming Studio"
+      "id": "reel_1_title",
+      "label": "Title",
+      "default": "Gaming Setup"
     },
     {
       "type": "url",
@@ -295,15 +182,9 @@
     },
     {
       "type": "text",
-      "id": "reel_2_creator",
-      "label": "Creator Name",
-      "default": "SARAH JENKINS"
-    },
-    {
-      "type": "text",
-      "id": "reel_2_env",
-      "label": "Environment",
-      "default": "Creator Workspace"
+      "id": "reel_2_title",
+      "label": "Title",
+      "default": "Minimal Desk"
     },
     {
       "type": "url",
@@ -316,61 +197,13 @@
     },
     {
       "type": "text",
-      "id": "reel_3_creator",
-      "label": "Creator Name",
-      "default": "DAVID K."
-    },
-    {
-      "type": "text",
-      "id": "reel_3_env",
-      "label": "Environment",
-      "default": "Minimal Desk"
+      "id": "reel_3_title",
+      "label": "Title",
+      "default": "Productivity Setup"
     },
     {
       "type": "url",
       "id": "reel_3_video",
-      "label": "Video URL (MP4)"
-    },
-    {
-      "type": "header",
-      "content": "Reel 4"
-    },
-    {
-      "type": "text",
-      "id": "reel_4_creator",
-      "label": "Creator Name",
-      "default": "STUDIO 04"
-    },
-    {
-      "type": "text",
-      "id": "reel_4_env",
-      "label": "Environment",
-      "default": "Night Setup"
-    },
-    {
-      "type": "url",
-      "id": "reel_4_video",
-      "label": "Video URL (MP4)"
-    },
-    {
-      "type": "header",
-      "content": "Reel 5"
-    },
-    {
-      "type": "text",
-      "id": "reel_5_creator",
-      "label": "Creator Name",
-      "default": "MARCUS T."
-    },
-    {
-      "type": "text",
-      "id": "reel_5_env",
-      "label": "Environment",
-      "default": "Productivity Corner"
-    },
-    {
-      "type": "url",
-      "id": "reel_5_video",
       "label": "Video URL (MP4)"
     }
   ],
